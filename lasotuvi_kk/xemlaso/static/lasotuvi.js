@@ -162,7 +162,7 @@ function velaso(laso){
             }
         ).join(' ')
         addText(menh, (cung[data.cungTen][0]-1)*cell_width+cell_width/2, (cung[data.cungTen][1]-1)*cell_height+cell_height/12);
-        addText("Lá số tử vi", width/2, 1.2*height/4);
+        addText("Lá số tử vi", width/2, 1.1*height/4);
     }
 
     var tb = laso['thienBan'];

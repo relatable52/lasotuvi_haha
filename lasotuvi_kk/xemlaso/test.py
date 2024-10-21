@@ -1,8 +1,8 @@
 import datetime
 import json
-from utils import lapDiaBan
 from lasotuvi.DiaBan import diaBan
 from lasotuvi.ThienBan import lapThienBan
+from utils import lapDiaBan
 
 def api(hoten="haha", ngay=1, thang=1, nam=2004, gioi="nam", gio=1, zone=7):
     now = datetime.datetime.now()
