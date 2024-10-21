@@ -7,122 +7,83 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lá số tử vi</title>
-    <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
     <link href="{% static "style.css" %}" rel="stylesheet">
-    <script src="{% static 'client.js' %}"></script>
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.15/jsrender.min.js" integrity="sha512-6heofwTnm0osmeEuz47jQLMVpAe2/ww+hZ4xvyv/kgedYO0b9mhNnsh8nUQZrmcdbaDkxrN+1K4SV6L+V4EH6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Include jQuery UI CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- Include jQuery UI JavaScript -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 </head>
 
 <body>
-
-    <div class="masthead">
-        <div class="container">
-            <h1 class="wordmark">
-                Chương trình lập lá số tử vi
-            </h1>
-            <div class="formborder">
-                <form id="lstv">
-                    <div class="grid thongtin">
-                        <div class="col col-3">
-                            Họ tên
+    <div class="main">
+        <div class="masthead">
+            <div class="container" id="form-container">
+                <h1 class="wordmark">
+                    Thông tin lá số
+                </h1>
+                <div class="formborder">
+                    <form id="lstv">
+                        <div class="input-wrapper">
+                            <div class="label">Họ và tên</div>
+                            <input type="text" name="hoten" id="hoten" placeholder="Lá số tử vi" class="transparent-input">
                         </div>
-                        <div class="col col-9">
-                            <input type="text" name="hoten" id="hoten">
+                        <div class="input-wrapper">
+                            <div class="label">Giới tính</div>
+                            <div class="gender_btn_wrapper">
+                                <label class="radio_btn selected">
+                                    <label for="male">Nam</label>
+                                    <input type="radio" id="male" name="gioitinh" value="nam" onclick="selectRadio(this)" checked>
+                                    <span class="custom-radio"></span>
+                                </label>
+                                <label class="radio_btn">
+                                    <label for="female">Nữ</label>
+                                    <input type="radio" id="female" name="gioitinh" value="nu" onclick="selectRadio(this)">
+                                    <span class="custom-radio"></span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="grid thongtin">
-                        <div class="col col-3">
-                            Giới tính
+                        <div class="input-wrapper">
+                            <div class="label">Ngày tháng năm sinh</div>
+                            <input type="text" id="date-picker" name="date" class="transparent-input" placeholder="DD/MM/YYYY">
                         </div>
-                        <div class="col col-9">
-                            <select name="gioitinh" id="gioitinh">
-                                <option value="nam">Nam</option>
-                                <option value="nu">Nữ</option>
+                        <div class="input-wrapper">
+                            <div>
+                                <div class="label">Chọn lịch</div>
+                                <select name="amLich" required class="transparent-input">
+                                    <option value="off">Dương Lịch</option>
+                                    <option value="on">Âm Lịch</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-wrapper">
+                            <div class="label">
+                                Giờ sinh
+                            </div>
+                            <select name="giosinh" id="giosinh" required class="transparent-input">
+                                <option value="1">Tí  (23h - 1h)</option>
+                                <option value="2">Sửu (1h - 3h)</option>
+                                <option value="3">Dần (3h - 5h)</option>
+                                <option value="4">Mão (5h - 7h)</option>
+                                <option value="5">Thìn (7h - 9h)</option>
+                                <option value="6">Tị (9h - 11h)</option>
+                                <option value="7">Ngọ (11h - 13h)</option>
+                                <option value="8">Mùi (13h - 15h)</option>
+                                <option value="9">Thân (15h - 17h)</option>
+                                <option value="10">Dậu (17h - 19h)</option>
+                                <option value="11">Tuất (19h - 21h)</option>
+                                <option value="12">Hợi (21h - 23h)</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="grid thongtin">
-                        <div class="col col-3">
-                            Ngày tháng năm sinh
-                        </div>
-                        <div class="col col-5">
-                            <select name="ngaysinh" id="ngaysinh">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                                <option value="21">21</option>
-                                <option value="22">22</option>
-                                <option value="23">23</option>
-                                <option value="24">24</option>
-                                <option value="25">25</option>
-                                <option value="26">26</option>
-                                <option value="27">27</option>
-                                <option value="28">28</option>
-                                <option value="29">29</option>
-                                <option value="30">30</option>
-                                <option value="31">31</option>
-                            </select> /
-                            <select name="thangsinh" id="thangsinh">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                            </select> /
-                            <input type="text" id="namsinh" name="namsinh" placeholder="Năm sinh">
-                        </div>
-
-                        <div class="col col-4">
-                            Âm lịch?
-                            <input type="checkbox" name="amlich">
-                        </div>
-                    </div>
-                    <div class="grid thongtin">
-                        <div class="col col-3">
-                            Giờ sinh
-                        </div>
-                        <div class="col col-3">
-                            <select name="giosinh" id="giosinh">
-                                <option selected="selected" value="1">Tí (23g - 1g)</option>
-                                <option value="2">Sửu (1g - 3g)</option>
-                                <option value="3">Dần (3g - 5g)</option>
-                                <option value="4">Mão (5g - 7g)</option>
-                                <option value="5">Thìn (7g - 9g)</option>
-                                <option value="6">Tị (9g - 11g)</option>
-                                <option value="7">Ngọ (11g - 13g)</option>
-                                <option value="8">Mùi (13g - 15g)</option>
-                                <option value="9">Thân (15g - 17g)</option>
-                                <option value="10">Dậu (17g - 19g)</option>
-                                <option value="11">Tuất (19g - 21g)</option>
-                                <option value="12">Hợi (21g - 23g)</option>
-                            </select>
-                        </div>
-                        <div class="col col-3">
-                            Múi giờ:
-                            <select name="muigio" id="muigio">
+                        <div class="input-wrapper">
+                            <div class="label">Múi giờ</div>
+                            <select name="muigio" id="muigio" class="transparent-input">
                                 <option value="-12">-12</option>
                                 <option value="-11">-11</option>
                                 <option value="-10">-10</option>
@@ -149,185 +110,28 @@
                                 <option value="11">+11</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="grid">
-                        <input type="button" class="button primary" value="Lập lá số" id="laplaso">
-                    </div>
-                </form>
+                        <div>
+                            <input type="button" class="button primary" value="Lập lá số" id="laplaso" onclick="toggle()">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>       
+
+        <div class="laso hide main" id="laso">
+            <div class="laso_panel container">
+                <h3 class="wordmark">Tùy chỉnh lá số</h3>
+                <input type="button" class="button secondary" value="Thay đổi thông tin" onclick="toggle()">
+            </div>
+            <div class="chart-container container">
+                <h3 class="wordmark">Lá số</h3>
+                <button id="resetButton">🏠</button>
+                <div id="chart"></div>
             </div>
         </div>
     </div>
-
-    <div class="anlaso laso border" id="laso">
-        <div class="grid">
-            <div class="col col-3">
-                <div class="container">
-                    <div class="grid diaCung border-bottom" cung-id="6" id="cungTy5">Tỵ</div>
-                    <div class="grid diaCung border-bottom" cung-id="5" id="cungThin">Thìn</div>
-                    <div class="grid diaCung border-bottom inset-border" cung-id="4" id="cungMao">Mão</div>
-                    <div class="grid diaCung" cung-id="3" id="cungDan">Dần</div>
-                </div>
-            </div>
-            <div class="col col-6">
-                <div class="container">
-                    <div class="grid">
-                        <div class="col col-6 diaCung border-left" cung-id="7" id="cungNgo">Ngọ</div>
-                        <div class="col col-6 diaCung border-left" cung-id="8" id="cungMui">Mùi</div>
-                    </div>
-
-                    <div class="grid thienBan border-top border-left border-bottom border-right" id="thienBan">
-
-                    </div>
-                    <div class="grid">
-                        <div class="col col-6 diaCung border-left" cung-id="2" id="cungSuu">
-                            Sửu
-                        </div>
-                        <div class="col col-6 diaCung border-left" cung-id="1" id="cungTy1">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col col-3">
-                <div class="container">
-                    <div class="grid diaCung border-left border-bottom" cung-id="9" id="cungThan">Thân</div>
-                    <div class="grid diaCung border-bottom" cung-id="10" id="cungDau">Dậu</div>
-                    <div class="grid diaCung border-bottom" cung-id="11" id="cungTuat">Tuất</div>
-                    <div class="grid diaCung border-left" cung-id="12" id="cungHoi">Hợi</div>
-                </div>
-            </div>
-        </div>
-    </div>
-{% verbatim %}
-    <script id="cungDiaBan" type="text/x-jsrender">
-        <div class="grid cung-top">
-            <div class="col col-2 tooltips" title="Địa chi cung {{:cungTen}}">{{:cungTen}}</div>
-            <div class="col col-8">
-                <span class="cungChu">
-                {{:cungChu}}
-            </span> {{if cungThan == true}}
-                <span class="cungThan label">Thân</span> {{/if}}
-            </div>
-            <div class="col col-2 tooltips" title="Đại hạn {{:cungDaiHan}} - {{:(cungDaiHan+9)}}">{{:cungDaiHan}}</div>
-        </div>
-        <div class="grid cung-middle">
-            <div class="chinhTinh">
-                {{for cungSao}} {{if saoLoai == 1}}
-                <li class="{{:cssSao}}">{{:saoTen}} {{if saoDacTinh !== null}} ({{:saoDacTinh}}) {{/if}}
-                </li>
-                {{/if}} {{/for}}
-            </div>
-
-            <div class="phuTinh">
-                <div class="saotot">
-                    {{for cungSao}} {{if vongTrangSinh === 0 && saoLoai !==1 && saoLoai
-                    < 10}} <div class="grid">
-                        <div class="col {{:cssSao}}">
-                            {{:saoTen}} {{if saoDacTinh !== null}} ({{:saoDacTinh}}) {{/if}}
-                        </div>
-                </div>
-                {{/if}} {{/for}}
-            </div>
-            <div class="saoxau">
-                {{for cungSao}} {{if vongTrangSinh === 0 && saoLoai !==1 && saoLoai > 10}}
-                <div class="grid">
-                    <div class="{{:cssSao}}">
-                        {{:saoTen}} {{if saoDacTinh !== null}} ({{:saoDacTinh}}) {{/if}}
-                    </div>
-                </div>
-                {{/if}} {{/for}}
-            </div>
-            <div class="tuanTriet">
-                {{if trietLo == true}}
-                <span class="label label-triet">Triệt</span> {{/if}} {{if tuanTrung == true}}
-                <span class="label label-tuan">Tuần</span> {{/if}}
-
-            </div>
-        </div>
-        </div>
-        <div class="grid cung-bottom">
-            <div class="col col-3 tooltips" title="Tiểu hạn của năm {{:cungTieuHan}}">{{:cungTieuHan}}</div>
-            {{for cungSao}} {{if vongTrangSinh == 1}}
-            <div class="col col-6 {{:cssSao}}">
-                {{:saoTen}}
-            </div>
-            {{/if}} {{/for}}
-            <div class="col col-3 tooltips" title="Cung ({{if cungAmDuong == -1}}âm{{else}}dương{{/if}}), ngũ hành {{:hanhCung}}">
-                {{if cungAmDuong == -1}}-{{else}}+{{/if}}{{:hanhCung}}
-            </div>
-        </div>
-    </script>
-
-    <script id="vungThienBan" type="text/x-jsrender">
-        <div class="noidung">
-            <div class="header">Ngày xem: {{:today}}</div>
-            <div class="grid">
-                <div class="col col-3 cotTrai">Họ tên</div>
-                <div class="col col-9 cotPhai">{{:ten}}</div>
-            </div>
-
-            <div class="grid">
-                <div class="col col-3 cotTrai">Bát tự</div>
-                <div class="col col-9 cotPhai">Năm {{:canNamTen}} {{:chiNamTen}}, tháng {{:canThang}} {{:chiThang}} {{if thangNhuan == 1}} (nhuận) {{/if}}, ngày {{:canNgay}} {{:chiNgay}}, giờ {{:gioSinh}}</div>
-            </div>
-
-            <div class="grid">
-                <div class="col col-3 cotTrai">Tuổi</div>
-                <div class="col col-9 cotPhai">{{:amDuongNamSinh}} {{:namNu}} ({{:amDuongMenh}})</div>
-            </div>
-
-            <div class="grid">
-                <div class="col col-3 cotTrai">Ngày sinh</div>
-                <div class="col col-9 cotPhai">
-                    <div>{{:ngayAm}}/{{:thangAm}}/{{:canNamTen}} {{:chiNamTen}} (Âm lịch)</div>
-                    <div>{{:ngayDuong}}/{{:thangDuong}}/{{:namDuong}} (Dương lịch)</div>
-                </div>
-            </div>
-
-            <div class="grid">
-                <div class="col col-3 cotTrai">Bản mệnh</div>
-                <div class="col col-9 cotPhai">
-                    {{:banMenh}}
-                </div>
-            </div>
-
-            <div class="grid">
-                <div class="col col-3 cotTrai">Cục</div>
-                <div class="col col-9 cotPhai">
-                    {{:tenCuc}}
-                </div>
-            </div>
-
-            <div class="grid">
-                <div class="col col-3 cotTrai">Mệnh chủ</div>
-                <div class="col col-9 cotPhai">
-                    {{:menhChu}}
-                </div>
-            </div>
-
-            <div class="grid">
-                <div class="col col-3 cotTrai">Thân chủ</div>
-                <div class="col col-9 cotPhai">
-                    {{:thanChu}}
-                </div>
-            </div>
-
-            <div class="grid sinhkhac">
-                {{:sinhKhac}}
-            </div>
-
-            <div class="mausac">
-                <div class="grid">
-                    <span class="col col-2">Màu sắc</span>
-                    <span class="col col-2 hanhKim gioithieuhanh">Kim</span>
-                    <span class="col col-2 hanhThuy gioithieuhanh">Thủy</span>
-                    <span class="col col-2 hanhHoa gioithieuhanh">Hỏa</span>
-                    <span class="col col-2 hanhTho gioithieuhanh">Thổ</span>
-                    <span class="col col-2 hanhMoc gioithieuhanh">Mộc</span>
-                </div>
-            </div>
-    </script>
-{% endverbatim %}
 </body>
-
+<footer>
+    <script src="{% static "lasotuvi.js" %}"></script>
+</footer>
 </html>

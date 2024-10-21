@@ -34,43 +34,7 @@ $(document).ready(function () {
     });
     function lapLaSo(laso) {
         try {
-            $.templates({
-                cungDiaBan: "#cungDiaBan",
-                vungThienBan: "#vungThienBan"
-            });
-            var tb = laso['thienBan'];
-            var data = laso['thapNhiCung'];
-            var thienBan = $.templates.vungThienBan.render(tb);
-            $("#thienBan").html(thienBan);
-            var cungTy1 = $.templates.cungDiaBan.render(data[1]);
-            $("#cungTy1").html(cungTy1);
-            var cungSuu = $.templates.cungDiaBan.render(data[2]);
-            $("#cungSuu").html(cungSuu);
-            var cungDan = $.templates.cungDiaBan.render(data[3]);
-            $("#cungDan").html(cungDan);
-            var cungMao = $.templates.cungDiaBan.render(data[4]);
-            $("#cungMao").html(cungMao);
-            var cungThin = $.templates.cungDiaBan.render(data[5]);
-            $("#cungThin").html(cungThin);
-            var cungTy5 = $.templates.cungDiaBan.render(data[6]);
-            $("#cungTy5").html(cungTy5);
-            var cungNgo = $.templates.cungDiaBan.render(data[7]);
-            $("#cungNgo").html(cungNgo);
-            var cungMui = $.templates.cungDiaBan.render(data[8]);
-            $("#cungMui").html(cungMui);
-            var cungThan = $.templates.cungDiaBan.render(data[9]);
-            $("#cungThan").html(cungThan);
-            var cungDau = $.templates.cungDiaBan.render(data[10]);
-            $("#cungDau").html(cungDau);
-            var cungTuat = $.templates.cungDiaBan.render(data[11]);
-            $("#cungTuat").html(cungTuat);
-            var cungHoi = $.templates.cungDiaBan.render(data[12]);
-            $("#cungHoi").html(cungHoi);
-            var zt = new $.Zebra_Tooltips($('.tooltips'), {
-                'position': 'right',
-                'max_width': 300
-            });
-            zt.show($('#tooltip'), true);
+            console.log(thienBandiaBan)
         }
         catch (error) {
             baoLoi(error);

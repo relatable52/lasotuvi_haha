@@ -12,9 +12,8 @@ from .utils import lapDiaBan
 def api(request):
     now = datetime.datetime.now()
     hoTen = (request.GET.get('hoten'))
-    ngaySinh = int(request.GET.get('ngaysinh', now.day))
-    thangSinh = int(request.GET.get('thangsinh', now.month))
-    namSinh = int(request.GET.get('namsinh', now.year))
+    dob = request.GET.get('date', '')
+    (ngaySinh, thangSinh, namSinh) = (int(i) for i in dob.lower().split('/')) if len(dob)>0 else (now.day, now.month, now.year)
     gioiTinh = 1 if request.GET.get('gioitinh') == 'nam' else -1
     gioSinh = int(request.GET.get('giosinh', 1))
     timeZone = int(request.GET.get('muigio', 7))
