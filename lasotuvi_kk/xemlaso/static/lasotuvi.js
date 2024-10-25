@@ -1,3 +1,17 @@
+const selectElement = document.getElementById('namxem');
+const min = 1900;  // Minimum bound
+const max = 2100; // Maximum bound
+
+for (let i = min; i <= max; i++) {
+    const option = document.createElement('option');
+    option.value = i;
+    option.text = i;
+    if(i==2030){
+        option.selected = true;
+    }
+    selectElement.appendChild(option);
+}
+
 function selectRadio(radio) {
     // Remove the selected class from all containers
     document.querySelectorAll('.radio_btn').forEach(container => {
@@ -21,7 +35,7 @@ $(function() {
         dateFormat: "dd/mm/yy",  // Custom date format
         changeMonth: true,       // Dropdown for selecting month
         changeYear: true,        // Dropdown for selecting year
-        yearRange: "1900:2024"   // Year range for selection
+        yearRange: "1900:2100"   // Year range for selection
     });
 });
 
@@ -75,7 +89,8 @@ function velaso(laso){
         .attr("y", 0)
         .attr("width", width)
         .attr("height", height)
-        .attr("fill", "rgb(230, 230, 200)");
+        .attr("fill", "rgb(230, 230, 200)")
+        .attr("stroke", "black");
 
     svg.append("rect")
         .attr("x", cell_width)
@@ -112,18 +127,18 @@ function velaso(laso){
             .attr("stroke", "black");
     }
 
-    function addText(text, x, y){
+    function addText(text, x, y, style="", justify="middle"){
         svg.append("text")
+        .attr("class", style)
         .attr("x", x)    
         .attr("y", y)   
         .attr("dy", ".35em")          
-        .attr("text-anchor", "middle")
-        .style("font-size", "12px")   
-        .style("fill", "black")       
+        .attr("text-anchor", justify)
+        .attr("alignment-baseline", "center")      
         .text(text);           
     }
 
-    function drawCell(data, canNam, i){
+    function drawCell(data){
         var cung = {
             "Dần": [1, 4],
             "Mão": [1, 3],
@@ -138,31 +153,70 @@ function velaso(laso){
             "Tý": [3, 4], 
             "Sửu": [2, 4], 
         };
+        
+        up = cell_height/14;
+        left = cell_width/7;
+        down = 13*cell_height/14;
+        stepy = cell_height/14;
+        right = 6*cell_width/7;
+        stepx = cell_width/7;
+        middle_left = cell_width*0.05;
+        middle_right = cell_width*0.55;
 
-        var can = [
-            "G.",
-            "Â.",
-            "B.",
-            "Đ.",
-            "M.",
-            "K.",
-            "C.", 
-            "T.",
-            "N.", 
-            "Q."
-        ];
-
-        var canTen = can[(canNam%5*2 + i)%10];
-        addText(canTen + data.cungTen, (cung[data.cungTen][0]-1)*cell_width+cell_width/6, (cung[data.cungTen][1]-1)*cell_height+cell_height/12);
-        addText(data.cungTieuHan, (cung[data.cungTen][0]-1)*cell_width+cell_width/6, (cung[data.cungTen][1]-1)*cell_height+11*cell_height/12);
-        addText(data.cungDaiHan, (cung[data.cungTen][0]-1)*cell_width+7*cell_width/8, (cung[data.cungTen][1]-1)*cell_height+cell_height/12);
-        var menh = data.cungChu.toLowerCase().split(' ').map(
-            (word, index) => {
-                return word.charAt(0).toUpperCase() + word.slice(1);
+        soSaoChinh = 0;
+        soSaoTot = 0;
+        soSaoXau = 0;
+        for(let sao of data.cungSao){
+            if(sao.vongTrangSinh == 1){
+                addText(sao.saoTen, (cung[data.cungTen][0]-1)*cell_width+cell_width/2, (cung[data.cungTen][1]-1)*cell_height+down, "small");
             }
-        ).join(' ')
-        addText(menh, (cung[data.cungTen][0]-1)*cell_width+cell_width/2, (cung[data.cungTen][1]-1)*cell_height+cell_height/12);
-        addText("Lá số tử vi", width/2, 1.1*height/4);
+            if(sao.saoLoai == 1){
+                soSaoChinh += 1;
+                chinhTinhText = sao.saoTen;
+                if(sao.saoDacTinh !== null){
+                    chinhTinhText += " (" + sao.saoDacTinh + ")" ;
+                } 
+                addText(
+                    chinhTinhText, 
+                    (cung[data.cungTen][0]-1)*cell_width+cell_width/2, 
+                    (cung[data.cungTen][1]-1)*cell_height+up+soSaoChinh*stepy,
+                    sao.cssSao
+                );
+            }
+            if(sao.vongTrangSinh === 0 && sao.saoLoai !==1 && sao.saoLoai < 10){
+                soSaoTot += 1;
+                saoTotText = sao.saoTen;
+                if(sao.saoDacTinh !== null){
+                    saoTotText += " (" + sao.saoDacTinh + ")" ;
+                }
+                addText(
+                    saoTotText,  
+                    (cung[data.cungTen][0]-1)*cell_width+middle_left, (cung[data.cungTen][1]-1)*cell_height+up+(soSaoTot*0.9+2.4)*stepy, 
+                    'small ' + sao.cssSao, 
+                    'start'
+                );
+            }
+            if(sao.vongTrangSinh === 0 && sao.saoLoai !==1 && sao.saoLoai > 10){
+                soSaoXau += 1;
+                saoXauText = sao.saoTen;
+                if(sao.saoDacTinh !== null){
+                    saoXauText += " (" + sao.saoDacTinh + ")" ;
+                }
+                addText(
+                    saoXauText,
+                    (cung[data.cungTen][0]-1)*cell_width+middle_right, (cung[data.cungTen][1]-1)*cell_height+up+(soSaoXau*0.9+2.4)*stepy, 
+                    'small ' + sao.cssSao, 
+                    'start');
+            }
+        }
+
+        addText(data.canDiaBanTen + data.cungTen, (cung[data.cungTen][0]-1)*cell_width+left, (cung[data.cungTen][1]-1)*cell_height+up, "small");
+        addText(data.cungTieuHan, (cung[data.cungTen][0]-1)*cell_width+left, (cung[data.cungTen][1]-1)*cell_height+down-stepy, "small");
+        addText(data.luuDaiHan, (cung[data.cungTen][0]-1)*cell_width+left, (cung[data.cungTen][1]-1)*cell_height+down, "small");
+        addText(data.luuTieuHan, (cung[data.cungTen][0]-1)*cell_width+right, (cung[data.cungTen][1]-1)*cell_height+down, "small");
+        addText(data.cungDaiHan, (cung[data.cungTen][0]-1)*cell_width+right, (cung[data.cungTen][1]-1)*cell_height+up, "small");
+        addText(data.cungChu, (cung[data.cungTen][0]-1)*cell_width+cell_width/2, (cung[data.cungTen][1]-1)*cell_height+up, "small bold");
+        addText('Lá số tử vi', width/2, 1.1*height/4, "title");
     }
 
     var tb = laso['thienBan'];

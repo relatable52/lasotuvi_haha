@@ -13,15 +13,20 @@ def api(request):
     now = datetime.datetime.now()
     hoTen = (request.GET.get('hoten'))
     dob = request.GET.get('date', '')
+    namxem = int(request.GET.get('namxem', now.year))
     (ngaySinh, thangSinh, namSinh) = (int(i) for i in dob.lower().split('/')) if len(dob)>0 else (now.day, now.month, now.year)
+    
+    if namxem < namSinh:
+        namxem = namSinh
+
     gioiTinh = 1 if request.GET.get('gioitinh') == 'nam' else -1
     gioSinh = int(request.GET.get('giosinh', 1))
     timeZone = int(request.GET.get('muigio', 7))
     duongLich = False if request.GET.get('amlich') == 'on' else True
     db = lapDiaBan(diaBan, ngaySinh, thangSinh, namSinh, gioSinh,
-                   gioiTinh, duongLich, timeZone)
+                   gioiTinh, duongLich, timeZone, namxem=namxem)
     thienBan = lapThienBan(ngaySinh, thangSinh, namSinh,
-                           gioSinh, gioiTinh, hoTen, db)
+                           gioSinh, gioiTinh, hoTen, db, namxem=namxem)
     laso = {
         'thienBan': thienBan,
         'thapNhiCung': db.thapNhiCung

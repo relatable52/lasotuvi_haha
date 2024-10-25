@@ -33,7 +33,7 @@ from lasotuvi.Sao import (saoAnQuang, saoBachHo, saoBacSy, saoBatToa, saoBenh,
                  saoVanXuong, saoVuKhuc)
 
 
-def lapDiaBan(diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZone):
+def lapDiaBan(diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZone, namxem: int = 2024):
     if duongLich is True:
         nn, tt, nnnn, thangNhuan = \
             ngayThangNam(nn, tt, nnnn, duongLich, timeZone)

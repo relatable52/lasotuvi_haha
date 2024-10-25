@@ -10,7 +10,7 @@ from lasotuvi.Lich_HND import jdFromDate
 
 class lapThienBan(object):
     def __init__(self, nn, tt, nnnn, gioSinh, gioiTinh, ten, diaBan,
-                 duongLich=True, timeZone=7):
+                 duongLich=True, timeZone=7, namxem: int = 2024):
         super(lapThienBan, self).__init__()
         self.gioiTinh = 1 if gioiTinh == 1 else -1
         self.namNu = "Nam" if gioiTinh == 1 else "Nữ"
@@ -28,6 +28,7 @@ class lapThienBan(object):
         self.today = time.strftime("%d/%m/%Y")
         self.ngayDuong, self.thangDuong, self.namDuong, self.ten = \
             nn, tt, nnnn, ten
+        self.tuoi = namxem - self.namDuong + 1
         if duongLich is True:
             self.ngayAm, self.thangAm, self.namAm, self.thangNhuan = \
                 ngayThangNam(self.ngayDuong, self.thangDuong, self.namDuong,

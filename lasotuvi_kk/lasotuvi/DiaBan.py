@@ -3,8 +3,7 @@
 (c) 2016 doanguyen <dungnv2410@gmail.com>.
 """
 
-from lasotuvi.AmDuong import diaChi, dichCung, khoangCachCung
-
+from lasotuvi.AmDuong import diaChi, dichCung, khoangCachCung, ngayThangNamCanChi
 
 class cungDiaBan(object):
     """docstring for cungDiaBan"""
@@ -31,9 +30,22 @@ class cungDiaBan(object):
     def daiHan(self, daiHan):
         self.cungDaiHan = daiHan
         return self
+    
+    def luuDaiHan(self, luuDaiHan):
+        self.luuDaiHan = luuDaiHan
+        return self
+    
+    def luuTieuHan(self, luuTieuHan):
+        self.luuTieuHan = luuTieuHan
+        return self
 
     def tieuHan(self, tieuHan):
         self.cungTieuHan = diaChi[tieuHan + 1]['tenChi']
+        return self
+    
+    def canDiaBan(self, canDiaBanID: int, canDiaBanTen: str):
+        self.canDiaBanID = canDiaBanID
+        self.canDiaBanTen = canDiaBanTen
         return self
 
     def anCungThan(self):
@@ -47,11 +59,12 @@ class cungDiaBan(object):
 
 
 class diaBan(object):
-    def __init__(self, thangSinhAmLich, gioSinhAmLich):
+    def __init__(self, thangSinhAmLich, gioSinhAmLich, tuoi):
         super(diaBan, self).__init__()
         self.thangSinhAmLich = thangSinhAmLich
         self.gioSinhAmLich = gioSinhAmLich
         self.thapNhiCung = [cungDiaBan(i) for i in range(13)]
+        self.tuoi = tuoi
         self.nhapCungChu()
         self.nhapCungThan()
 
@@ -78,37 +91,37 @@ class diaBan(object):
             },
             {
                 'cungId': 2,
-                'tenCung': "Phụ mẫu",
+                'tenCung': "Phụ Mẫu",
                 'cungSoDiaBan': cungPhuMau
 
             },
             {
                 'cungId': 3,
-                'tenCung': "Phúc đức",
+                'tenCung': "Phúc Đức",
                 'cungSoDiaBan': cungPhucDuc
 
             },
             {
                 'cungId': 4,
-                'tenCung': "Điền trạch",
+                'tenCung': "Điền Trạch",
                 'cungSoDiaBan': cungDienTrach
 
             },
             {
                 'cungId': 5,
-                'tenCung': "Quan lộc",
+                'tenCung': "Quan Lộc",
                 'cungSoDiaBan': cungQuanLoc
 
             },
             {
                 'cungId': 6,
-                'tenCung': "Nô bộc",
+                'tenCung': "Nô Bộc",
                 'cungSoDiaBan': self.cungNoboc
 
             },
             {
                 'cungId': 7,
-                'tenCung': "Thiên di",
+                'tenCung': "Thiên Di",
                 'cungSoDiaBan': cungThienDi
 
             },
@@ -126,19 +139,19 @@ class diaBan(object):
             },
             {
                 'cungId': 10,
-                'tenCung': "Tử tức",
+                'tenCung': "Tử Tức",
                 'cungSoDiaBan': cungTuTuc
 
             },
             {
                 'cungId': 11,
-                'tenCung': "Phu thê",
+                'tenCung': "Phu Thê",
                 'cungSoDiaBan': cungTheThiep
 
             },
             {
                 'cungId': 12,
-                'tenCung': "Huynh đệ",
+                'tenCung': "Huynh Đệ",
                 'cungSoDiaBan': cungHuynhDe
 
             }
@@ -192,6 +205,74 @@ class diaBan(object):
     def nhapTriet(self, *args):
         for cung in args:
             self.thapNhiCung[cung].anTriet()
+        return self
+    
+    def nhapCanDiaBan(self, canNam):
+        can = [
+            "G.",
+            "Â.",
+            "B.",
+            "Đ.",
+            "M.",
+            "K.",
+            "C.", 
+            "T.",
+            "N.", 
+            "Q."
+        ]
+        for cung in self.thapNhiCung:
+            canCungId = (canNam%5*2 + ((cung.cungSo + 9)%12))%10+1
+            canCungTen = can[canCungId-1]
+            cung.canDiaBan(canCungId, canCungTen)
+        return self
+
+    def nhapLuuDaiHan(self, *args):
+        cungLuuDaiHan = [
+            "ĐV.Mệnh",
+            "ĐV.Phụ",
+            "ĐV.Phúc",
+            "ĐV.Điền",
+            "ĐV.Quan",
+            "ĐV.Nô",
+            "ĐV.Di",
+            "ĐV.Tật",
+            "ĐV.Tài",
+            "ĐV.Tử",
+            "ĐV.Phối",
+            "ĐV.Bào"
+        ]
+        canDVMenhID = 0
+        for cung in self.thapNhiCung:
+            for i in range(12):
+                index = (self.tuoi + 10*i)%120    
+                if index >= int(cung.cungDaiHan) and index < int(cung.cungDaiHan) + 10:
+                    cung = cung.luuDaiHan(cungLuuDaiHan[i])
+        for cung in self.thapNhiCung:
+            index = self.tuoi
+            if index >= int(cung.cungDaiHan) and index < int(cung.cungDaiHan) + 10:
+                canDVMenhID = cung.canDiaBanID
+
+        self.canDVMenhID = canDVMenhID
+        return self
+
+    def nhapLuuTieuHan(self, chiNamXem, *args):
+        cungLuuTieuHan = [
+            "TV.Mệnh",
+            "TV.Phụ",
+            "TV.Phúc",
+            "TV.Điền",
+            "TV.Quan",
+            "TV.Nô",
+            "TV.Di",
+            "TV.Tật",
+            "TV.Tài",
+            "TV.Tử",
+            "TV.Phối",
+            "TV.Bào"
+        ]
+        for cung in self.thapNhiCung:
+            tieuHanId = (cung.cungSo + 11 - chiNamXem)%12
+            cung = cung.luuTieuHan(cungLuuTieuHan[tieuHanId])
         return self
 
 

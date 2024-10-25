@@ -26,17 +26,25 @@ from lasotuvi.Sao import (saoAnQuang, saoBachHo, saoBacSy, saoBatToa, saoBenh,
                  saoThienY, saoThieuAm, saoThieuDuong, saoTieuHao,
                  saoTrangSinh, saoTrucPhu, saoTu, saoTuePha, saoTuongQuan,
                  saoTuPhu, saoTuVi, saoTuyet, saoVanKhuc, saoVanTinh,
-                 saoVanXuong, saoVuKhuc)
+                 saoVanXuong, saoVuKhuc, luuDVLoc, luuDVKhoa, luuDVKy, luuDVQuyen)
+
+from lasotuvi.DiaBan import diaBan
 
 
-def lapDiaBan(diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZone):
+def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZone, namxem: int = 2024):
     if duongLich is True:
         nn, tt, nnnn, thangNhuan = \
             ngayThangNam(nn, tt, nnnn, duongLich, timeZone)
+        
+    tuoi = namxem - nnnn + 1
     canThang, canNam, chiNam = \
         ngayThangNamCanChi(nn, tt, nnnn, False, timeZone)
+    
 
-    diaBan = diaBan(tt, gioSinh)
+    _, _, namxem_amlich, _ = ngayThangNam(1, 1, namxem, True, timeZone)
+    _, canNamXem, chiNamXem = ngayThangNamCanChi(1, 1, namxem_amlich, timeZone)
+
+    diaBan = diaBan(tt, gioSinh, tuoi=tuoi)
 
     amDuongNamSinh = thienCan[canNam]["amDuong"]
     amDuongChiNamSinh = diaChi[chiNam]["amDuong"]
@@ -48,15 +56,22 @@ def lapDiaBan(diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZone):
     cuc = nguHanh(hanhCuc)
     cucSo = cuc['cuc']
 
+    # Nhap can dia ban
+    diaBan = diaBan.nhapCanDiaBan(canNam)
+
     # Nhập đại hạn khi đã biết được số cục
     # Theo sách Số tử vi dưới góc nhìn khoa học
     # Dương Nam - Âm Nữ theo chiều thuận
     # Âm Nam - Dương Nữ theo chiều nghịch
     diaBan = diaBan.nhapDaiHan(cucSo, gioiTinh * amDuongChiNamSinh)
+    diaBan = diaBan.nhapLuuDaiHan(tuoi)
 
     # Nhập tiểu hạn
     khoiHan = dichCung(11, -3 * (chiNam - 1))
     diaBan = diaBan.nhapTieuHan(khoiHan, gioiTinh, chiNam)
+
+    #Nhap luu tieu han
+    diaBan = diaBan.nhapLuuTieuHan(chiNamXem)
 
     # Bắt đầu an Tử vi tinh hệ
     viTriTuVi = timTuVi(cucSo, nn)
@@ -450,6 +465,63 @@ def lapDiaBan(diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZone):
     diaBan.nhapSao(viTriHoaQuyen, saoHoaQuyen)
     diaBan.nhapSao(viTriHoaKhoa, saoHoaKhoa)
     diaBan.nhapSao(viTriHoaKy, saoHoaKy)
+
+    canDVMenhID = diaBan.canDVMenhID
+    if canDVMenhID == 1:
+        viTriHoaLoc = viTriLiemTrinh
+        viTriHoaQuyen = viTriPhaQuan
+        viTriHoaKhoa = viTriVuKhuc
+        viTriHoaKy = vitriThaiDuong
+    elif canDVMenhID == 2:
+        viTriHoaLoc = viTriThienCo
+        viTriHoaQuyen = viTriThienLuong
+        viTriHoaKhoa = viTriTuVi
+        viTriHoaKy = viTriThaiAm
+    elif canDVMenhID == 3:
+        viTriHoaLoc = viTriThienDong
+        viTriHoaQuyen = viTriThienCo
+        viTriHoaKhoa = viTriVanXuong
+        viTriHoaKy = viTriLiemTrinh
+    elif canDVMenhID == 4:
+        viTriHoaLoc = viTriThaiAm
+        viTriHoaQuyen = viTriThienDong
+        viTriHoaKhoa = viTriThienCo
+        viTriHoaKy = viTriCuMon
+    elif canDVMenhID == 5:
+        viTriHoaLoc = viTriThamLang
+        viTriHoaQuyen = viTriThaiAm
+        viTriHoaKhoa = viTriHuuBat
+        viTriHoaKy = viTriThienCo
+    elif canDVMenhID == 6:
+        viTriHoaLoc = viTriVuKhuc
+        viTriHoaQuyen = viTriThamLang
+        viTriHoaKhoa = viTriThienLuong
+        viTriHoaKy = viTriVanKhuc
+    elif canDVMenhID == 7:
+        viTriHoaLoc = vitriThaiDuong
+        viTriHoaQuyen = viTriVuKhuc
+        viTriHoaKhoa = viTriThienDong
+        viTriHoaKy = viTriThaiAm
+    elif canDVMenhID == 8:
+        viTriHoaLoc = viTriCuMon
+        viTriHoaQuyen = vitriThaiDuong
+        viTriHoaKhoa = viTriVanKhuc
+        viTriHoaKy = viTriVanXuong
+    elif canDVMenhID == 9:
+        viTriHoaLoc = viTriThienLuong
+        viTriHoaQuyen = viTriTuVi
+        viTriHoaKhoa = viTriThienPhu
+        viTriHoaKy = viTriVuKhuc
+    elif canDVMenhID == 10:
+        viTriHoaLoc = viTriPhaQuan
+        viTriHoaQuyen = viTriCuMon
+        viTriHoaKhoa = viTriThaiAm
+        viTriHoaKy = viTriThamLang
+
+    diaBan.nhapSao(viTriHoaLoc, luuDVLoc)
+    diaBan.nhapSao(viTriHoaQuyen, luuDVQuyen)
+    diaBan.nhapSao(viTriHoaKhoa, luuDVKhoa)
+    diaBan.nhapSao(viTriHoaKy, luuDVKy)
 
     #  An Lưu Hà - Thiên Trù
     # Sách cụ Thiên Lương không đề cập đến 2 sao này
