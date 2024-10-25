@@ -138,37 +138,37 @@ function velaso(laso){
         .text(text);           
     }
 
-    function drawCell(data){
-        var cung = {
-            "Dần": [1, 4],
-            "Mão": [1, 3],
-            "Thìn": [1, 2],
-            "Tỵ": [1, 1],
-            "Ngọ": [2, 1],
-            "Mùi": [3, 1],
-            "Thân": [4, 1],
-            "Dậu": [4, 2],
-            "Tuất": [4, 3],
-            "Hợi": [4, 4],
-            "Tý": [3, 4], 
-            "Sửu": [2, 4], 
-        };
-        
-        up = cell_height/14;
-        left = cell_width/7;
-        down = 13*cell_height/14;
-        stepy = cell_height/14;
-        right = 6*cell_width/7;
-        stepx = cell_width/7;
-        middle_left = cell_width*0.05;
-        middle_right = cell_width*0.55;
+    var cung = {
+        "Dần": [1, 4],
+        "Mão": [1, 3],
+        "Thìn": [1, 2],
+        "Tỵ": [1, 1],
+        "Ngọ": [2, 1],
+        "Mùi": [3, 1],
+        "Thân": [4, 1],
+        "Dậu": [4, 2],
+        "Tuất": [4, 3],
+        "Hợi": [4, 4],
+        "Tý": [3, 4], 
+        "Sửu": [2, 4], 
+    };
 
+    up = cell_height/18;
+    left = cell_width/7;
+    down = 17*cell_height/18;
+    stepy = cell_height/18;
+    right = 6*cell_width/7;
+    stepx = cell_width/7;
+    middle_left = cell_width*0.05;
+    middle_right = cell_width*0.55;
+
+    function drawCell(data){
         soSaoChinh = 0;
         soSaoTot = 0;
         soSaoXau = 0;
         for(let sao of data.cungSao){
             if(sao.vongTrangSinh == 1){
-                addText(sao.saoTen, (cung[data.cungTen][0]-1)*cell_width+cell_width/2, (cung[data.cungTen][1]-1)*cell_height+down, "small");
+                addText(sao.saoTen, (cung[data.cungTen][0]-1)*cell_width+cell_width/2, (cung[data.cungTen][1]-1)*cell_height+down-stepy, "small bold");
             }
             if(sao.saoLoai == 1){
                 soSaoChinh += 1;
@@ -192,7 +192,7 @@ function velaso(laso){
                 addText(
                     saoTotText,  
                     (cung[data.cungTen][0]-1)*cell_width+middle_left, (cung[data.cungTen][1]-1)*cell_height+up+(soSaoTot*0.9+2.4)*stepy, 
-                    'small ' + sao.cssSao, 
+                    'smaller ' + sao.cssSao, 
                     'start'
                 );
             }
@@ -205,28 +205,42 @@ function velaso(laso){
                 addText(
                     saoXauText,
                     (cung[data.cungTen][0]-1)*cell_width+middle_right, (cung[data.cungTen][1]-1)*cell_height+up+(soSaoXau*0.9+2.4)*stepy, 
-                    'small ' + sao.cssSao, 
+                    'smaller ' + sao.cssSao, 
                     'start');
             }
         }
 
-        addText(data.canDiaBanTen + data.cungTen, (cung[data.cungTen][0]-1)*cell_width+left, (cung[data.cungTen][1]-1)*cell_height+up, "small");
-        addText(data.cungTieuHan, (cung[data.cungTen][0]-1)*cell_width+left, (cung[data.cungTen][1]-1)*cell_height+down-stepy, "small");
-        addText(data.luuDaiHan, (cung[data.cungTen][0]-1)*cell_width+left, (cung[data.cungTen][1]-1)*cell_height+down, "small");
-        addText(data.luuTieuHan, (cung[data.cungTen][0]-1)*cell_width+right, (cung[data.cungTen][1]-1)*cell_height+down, "small");
-        addText(data.cungDaiHan, (cung[data.cungTen][0]-1)*cell_width+right, (cung[data.cungTen][1]-1)*cell_height+up, "small");
+        addText(data.canDiaBanTen + data.cungTen, (cung[data.cungTen][0]-1)*cell_width+left, (cung[data.cungTen][1]-1)*cell_height+up, "smaller");
+        addText(data.cungTieuHan, (cung[data.cungTen][0]-1)*cell_width+left, (cung[data.cungTen][1]-1)*cell_height+down-stepy, "smaller");
+        addText(data.luuDaiHan, (cung[data.cungTen][0]-1)*cell_width+left, (cung[data.cungTen][1]-1)*cell_height+down, "smaller");
+        addText(data.luuTieuHan, (cung[data.cungTen][0]-1)*cell_width+right, (cung[data.cungTen][1]-1)*cell_height+down, "smaller");
+        addText(data.cungDaiHan, (cung[data.cungTen][0]-1)*cell_width+right, (cung[data.cungTen][1]-1)*cell_height+up, "smaller");
         addText(data.cungChu, (cung[data.cungTen][0]-1)*cell_width+cell_width/2, (cung[data.cungTen][1]-1)*cell_height+up, "small bold");
-        addText('Lá số tử vi', width/2, 1.1*height/4, "title");
     }
 
     var tb = laso['thienBan'];
     var data = laso['thapNhiCung'];
     var canNam = tb.canNam;
+    var chieu = tb.gioiTinh*tb.amDuongNamSinhId;
+    var chiNam = tb.chiNam;
 
-    for(i=1; i<13; i++){
-        cell = data[i]
+    for(let i=1; i<13; i++){
+        cell = data[i];
         drawCell(cell, canNam, i);
+        let start = (12+chieu*(i-1)-chiNam+2)%12; 
+        let tuoiText = start;
+        for(let j = 1; j < 9; j++){
+            tuoiText += ", " + (start + 12*j);
+        }
+        addText(tuoiText, (cung[cell.cungTen][0]-1)*cell_width+cell_width/2, (cung[cell.cungTen][1]-1)*cell_height+down-2*stepy, "tiny");
     }
+
+    var left1 = cell_width*1.25
+    var left2 = cell_width*1.8
+    var up1 = cell_height*1.3
+    var stepy1 = cell_width/12
+    addText('Lá số tử vi', width/2, 1.1*height/4, "title");
+    addText("Họ tên:", )
     
     // Define the zoom behavior
     const zoom = d3.zoom()

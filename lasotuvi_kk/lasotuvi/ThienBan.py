@@ -54,6 +54,7 @@ class lapThienBan(object):
 
         cungAmDuong = 1 if (diaBan.cungMenh % 2 == 1) else -1
         self.amDuongNamSinh = "Dương" if (self.chiNam % 2 == 1) else "Âm"
+        self.amDuongNamSinhId = 1 if (self.chiNam % 2 == 1) else -1
         if (cungAmDuong * self.gioiTinh == 1):
             self.amDuongMenh = "Âm dương thuận lý"
         else:

@@ -257,18 +257,18 @@ class diaBan(object):
 
     def nhapLuuTieuHan(self, chiNamXem, *args):
         cungLuuTieuHan = [
-            "TV.Mệnh",
-            "TV.Phụ",
-            "TV.Phúc",
-            "TV.Điền",
-            "TV.Quan",
-            "TV.Nô",
-            "TV.Di",
-            "TV.Tật",
-            "TV.Tài",
-            "TV.Tử",
-            "TV.Phối",
-            "TV.Bào"
+            "LN.Mệnh",
+            "LN.Phụ",
+            "LN.Phúc",
+            "LN.Điền",
+            "LN.Quan",
+            "LN.Nô",
+            "LN.Di",
+            "LN.Tật",
+            "LN.Tài",
+            "LN.Tử",
+            "LN.Phối",
+            "LN.Bào"
         ]
         for cung in self.thapNhiCung:
             tieuHanId = (cung.cungSo + 11 - chiNamXem)%12

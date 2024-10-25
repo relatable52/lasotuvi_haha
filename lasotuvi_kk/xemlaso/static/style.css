@@ -281,7 +281,7 @@ select{
 #chart {
     font-family: "Archivo Narrow", sans-serif;
     font-style: normal;
-    font-size: 0.9em;
+    font-size: 12px;
     cursor: grab;
 }
 
@@ -290,7 +290,15 @@ select{
 }
 
 .small{
-    font-size: 0.75em;
+    font-size: 0.8em;
+}
+
+.smaller{
+    font-size: 0.7em;
+}
+
+.tiny{
+    font-size: 0.6em;
 }
 
 .title{
