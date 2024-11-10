@@ -29,6 +29,7 @@ class lapThienBan(object):
         self.ngayDuong, self.thangDuong, self.namDuong, self.ten = \
             nn, tt, nnnn, ten
         self.tuoi = namxem - self.namDuong + 1
+        self.namxem = namxem
         if duongLich is True:
             self.ngayAm, self.thangAm, self.namAm, self.thangNhuan = \
                 ngayThangNam(self.ngayDuong, self.thangDuong, self.namDuong,
@@ -37,13 +38,12 @@ class lapThienBan(object):
             self.ngayAm, self.thangAm, self.namAm = self.ngayDuong,\
                 self.thangDuong, self.namDuong
 
-        self.canThang, self.canNam, self.chiNam = \
+        self.canThang, self.chiThang,  self.canNam, self.chiNam = \
             ngayThangNamCanChi(self.ngayAm, self.thangAm,
                                self.namAm, False, self.timeZone)
-        self.chiThang = self.thangAm
         self.canThangTen = thienCan[self.canThang]['tenCan']
         self.canNamTen = thienCan[self.canNam]['tenCan']
-        self.chiThangTen = diaChi[self.thangAm]['tenChi']
+        self.chiThangTen = diaChi[self.chiThang]['tenChi']
         self.chiNamTen = diaChi[self.chiNam]['tenChi']
 
         self.canNgay, self.chiNgay = canChiNgay(

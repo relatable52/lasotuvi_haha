@@ -5,6 +5,11 @@
 
 from lasotuvi.AmDuong import diaChi, dichCung, khoangCachCung, ngayThangNamCanChi
 
+from lasotuvi.Sao import (saoLiemTrinh, saoTuVi, saoThienDong, saoVuKhuc, saoVanKhuc,
+                          saoThienCo, saoThienPhu, saoThaiAm, saoThamLang, saoCuMon,
+                          saoThienTuong, saoThienLuong, saoThatSat, saoPhaQuan, saoVanXuong,
+                          saoTaPhu, saoHuuBat, saoThaiDuong)
+
 class cungDiaBan(object):
     """docstring for cungDiaBan"""
     def __init__(self, cungID):
@@ -21,6 +26,7 @@ class cungDiaBan(object):
     def themSao(self, sao):
         dacTinhSao(self.cungSo, sao)
         self.cungSao.append(sao.__dict__)
+        self.cungSao.sort(key=lambda x: x['priority'], reverse=True)
         return self
 
     def cungChu(self, tenCungChu):
@@ -57,6 +63,29 @@ class cungDiaBan(object):
     def anTriet(self):
         self.trietLo = True
 
+    def anLyTam(self, canDoiID):
+        bangHoa = [
+            [saoLiemTrinh, saoPhaQuan, saoVuKhuc, saoThaiDuong],
+            [saoThienCo, saoThienLuong, saoTuVi, saoThaiAm],
+            [saoThienDong, saoThienCo, saoVanXuong, saoLiemTrinh],
+            [saoThaiAm, saoThienDong, saoThienCo, saoCuMon],
+            [saoThamLang, saoThaiAm, saoHuuBat, saoThienCo],
+            [saoVuKhuc, saoThamLang, saoThienLuong, saoVanKhuc],
+            [saoThaiDuong, saoVuKhuc, saoThaiAm, saoThienDong],
+            [saoCuMon, saoThaiDuong, saoVanKhuc, saoVanXuong],
+            [saoThienLuong, saoTuVi, saoTaPhu, saoVuKhuc],
+            [saoPhaQuan, saoCuMon, saoThaiAm, saoThamLang]
+        ]
+        self.lyTamID = []
+        self.huongTamID = []
+        canID = self.canDiaBanID
+        for i in range(4):
+            if bangHoa[canID-1][i].saoID in [sao['saoID'] for sao in self.cungSao]:
+                self.lyTamID.append(i)
+            if bangHoa[canDoiID-1][i].saoID in [sao['saoID'] for sao in self.cungSao]:
+                self.huongTamID.append(i)
+        return self
+    
 
 class diaBan(object):
     def __init__(self, thangSinhAmLich, gioSinhAmLich, tuoi):
@@ -271,10 +300,16 @@ class diaBan(object):
             "LN.Bào"
         ]
         for cung in self.thapNhiCung:
-            tieuHanId = (cung.cungSo + 11 - chiNamXem)%12
+            tieuHanId = (cung.cungSo + 12 - chiNamXem)%12
             cung = cung.luuTieuHan(cungLuuTieuHan[tieuHanId])
         return self
-
+    
+    def nhapLyTam(self):
+        for i in range(len(self.thapNhiCung)):
+            cungDoiID = (i+6)%12
+            canDoiID = self.thapNhiCung[cungDoiID].canDiaBanID
+            self.thapNhiCung[i].anLyTam(canDoiID)
+        return self
 
 def dacTinhSao(viTriDiaBan, sao):
     saoId = sao.saoID
@@ -291,6 +326,8 @@ def dacTinhSao(viTriDiaBan, sao):
             "H", "H"],
         6: ["Thiên cơ", "Đ", "Đ", "H", "M", "M", "V", "Đ", "Đ", "V", "M", "M",
             "H"],
+        7: ["Thiên phủ", "M", "B", "M", "B", "V", "Đ", "M", "Đ", "M", "B",
+             "V", "Đ"],
         8: ["Thái âm", "V", "Đ", "H", "H", "H", "H", "H", "Đ", "V", "M",
             "M", "M"],
         9: ["Tham lang", "H", "M", "Đ", "H", "V", "H", "H", "M", "Đ", "H",

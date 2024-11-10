@@ -298,13 +298,14 @@ def ngayThangNamCanChi(nn, tt, nnnn, duongLich=True, timeZone=7):
             ngayThangNam(nn, tt, nnnn, timeZone=timeZone)
     # Can của tháng
     canThang = (nnnn * 12 + tt + 3) % 10 + 1
+    chiThang = (tt + 1) % 12 + 1
     # Can chi của năm
     canNamSinh = (nnnn + 6) % 10 + 1
     chiNam = (nnnn + 8) % 12 + 1
 
-    return [canThang, canNamSinh, chiNam]
+    return [canThang, chiThang, canNamSinh, chiNam]
 
-
+    
 def nguHanh(tenHanh):
     """
     Args:
@@ -332,6 +333,8 @@ def nguHanh(tenHanh):
     elif tenHanh == "Tho" or tenHanh == "O":
         return {"id": 5, "tenHanh": "Thổ", "cuc": 5, "tenCuc": "Thổ ngũ Cục",
                 "css": "hanhTho"}
+    elif tenHanh == "none":
+        return {"id": 6, "css":"none"}
     else:
         raise Exception(
             "Tên Hành phải thuộc Kim (K), Mộc (M), Thủy (T), \
@@ -389,7 +392,7 @@ def nguHanhNapAm(diaChi, thienCan, xuatBanMenh=False):
         "H4": "THIÊN THƯỢNG HỎA",
         "O4": "LỘ BÀN THỔ",
         "M4": "DƯƠNG LIỄU MỘC",
-        "T5": "TRUYỀN TRUNG THỦY",
+        "T5": "TUYỀN TRUNG THỦY",
         "H5": "SƠN HẠ HỎA",
         "O5": "ÐẠI TRẠCH THỔ",
         "M5": "THẠCH LỰU MỘC",
@@ -578,7 +581,61 @@ def timThienMa(chiNam):
         return 6
     else:
         raise Exception("Không tìm được Thiên mã")
+    
 
+def timTuongTinh(chinam):
+    demnghich = chinam % 4
+    if demnghich == 1:
+        return 1
+    elif demnghich == 2:
+        return 10
+    elif demnghich == 3:
+        return 7
+    elif demnghich == 0:
+        return 4
+
+def timThienVu(chiThang):
+    if chiThang == 1 or chiThang == 5 or chiThang == 9:
+        return 6
+    elif chiThang == 3 or chiThang == 7 or chiThang == 11:
+        return 3
+    elif chiThang == 4 or chiThang ==8 or chiThang == 12:
+        return 12
+    elif chiThang == 2 or chiThang == 6 or chiThang == 10:
+        return 9
+
+def timThienNguyet(chiThang):
+    if chiThang == 1 or chiThang == 11:
+        return 11
+    elif chiThang == 4 or chiThang == 9 or chiThang == 12:
+        return 3
+    elif chiThang == 5 or chiThang == 8:
+        return 8
+    elif chiThang == 6:
+        return 4
+    elif chiThang == 3:
+        return 5
+    elif chiThang == 2:
+        return 6
+    elif chiThang == 10:
+        return 7
+    elif chiThang == 7:
+        return 12
+
+def timAmSat(chiThang):
+    dem = chiThang % 6
+    if dem == 0:
+        return 5
+    elif dem == 1:
+        return 3
+    elif dem == 2:
+        return 1
+    elif dem == 3:
+        return 11
+    elif dem == 4:
+        return 9
+    elif dem == 5:
+        return 7
 
 def timPhaToai(chiNam):
     demNghich = chiNam % 3

@@ -22,7 +22,7 @@ def api(request):
     gioiTinh = 1 if request.GET.get('gioitinh') == 'nam' else -1
     gioSinh = int(request.GET.get('giosinh', 1))
     timeZone = int(request.GET.get('muigio', 7))
-    duongLich = False if request.GET.get('amlich') == 'on' else True
+    duongLich = True
     db = lapDiaBan(diaBan, ngaySinh, thangSinh, namSinh, gioSinh,
                    gioiTinh, duongLich, timeZone, namxem=namxem)
     thienBan = lapThienBan(ngaySinh, thangSinh, namSinh,

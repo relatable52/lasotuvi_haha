@@ -20,8 +20,7 @@ body{
 
 .main{
     width: 100%;
-    height: max-content;
-    min-height: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -32,13 +31,17 @@ body{
 @media (max-width: 800px) {
     .main{
         width: 100%;
-        height: max-content;
-        min-height: 100%;
+        min-height: max-content;
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-content: center;
         align-items: center;
-        overflow: auto;
+    }
+    .laso_panel{
+        width: 80% !important;
+        height: max-content !important;
     }
 }
 
@@ -57,16 +60,17 @@ body{
     border-radius: 0.5rem;
     box-shadow: 0 0.2rem 4rem rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
     padding-top: 1rem;
     padding-bottom: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    transition: all 1s linear;
     display: flex;
     flex-direction: column;
-    max-width: 50rem;
     margin: 0.2rem;
+}
+
+#form-container{
+    min-width: 25rem;   
 }
 
 .wordmark{
@@ -80,37 +84,14 @@ body{
     pointer-events: none;
 }
 
-@keyframes shrinkFade {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-        pointer-events: all;
-    }
-    99% {
-        transform: scale(0);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(0);
-        opacity: 0;
-        display: none;
-        pointer-events: None;
-    }
-}
-
-.collapsed{
-    animation: shrinkFade 0.4s forwards;
-}
-
 .transparent-input {
     padding: 0.1rem;
-    width: 100%; /* Set a specific width */
+    width: 100%;
     border: none; /* Remove default border */
     background-color: transparent; /* Transparent background */
     color: #aa8; /* Text color */
     font-size: 1rem; /* Font size */
     outline: none; /* Remove outline on focus */
-    min-width: 20rem;
 }
 
 /* Add a subtle focus effect */
@@ -128,18 +109,14 @@ body{
 }
 
 select::-webkit-scrollbar {
-    width: 12px; /* Width of the scrollbar */
-    background-color: #ffffff;
+    width: 0.5rem; /* Width of the scrollbar */
+    background-color: #002b3c;
+    border-radius: 0.2rem;
 }
 
 select::-webkit-scrollbar-thumb {
     background-color: #4CAF50; /* Green color for scrollbar thumb */
     border-radius: 0.2rem; /* Rounded corners for scrollbar thumb */
-}
-
-select::-webkit-scrollbar-track {
-    background-color: rgba(255, 255, 200, 0.1); /* Light gray for the scrollbar track */
-    border-radius: 6px; /* Rounded corners for scrollbar track */
 }
 
 .input-wrapper{
@@ -278,15 +255,46 @@ select{
     color: #ffd;
 }
 
-#chart {
-    font-family: "Archivo Narrow", sans-serif;
-    font-style: normal;
-    font-size: 12px;
-    cursor: grab;
+.chart-container{
+    width: 80%;
+    height: 90vh;
+    max-width: 60rem;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
 }
 
-.bold{
-    font-weight: bold;
+.laso_panel{
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+
+#chart {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: normal;
+    font-size: 15px;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0.5rem
+}
+
+#chart::-webkit-scrollbar {
+    width: 0.5rem; /* Width of the scrollbar */
+    height: 0.5rem;
+    background-color: #002b3c;
+    border-radius: 0.2rem;
+}
+
+#chart::-webkit-scrollbar-thumb {
+    background-color: #4CAF50; /* Green color for scrollbar thumb */
+    border-radius: 0.2rem; /* Rounded corners for scrollbar thumb */
 }
 
 .small{
@@ -303,29 +311,137 @@ select{
 
 .title{
     font-size: 2em !important;
-    font-weight: 300;
-}
-
-.grabbing {
-    cursor: grabbing !important; /* Apply grabbing cursor during drag */
-}
-
-.hanhKim {
-    fill: #9E9E9E;
-}
-
-.hanhMoc {
-    fill: #009b05;
-}
-
-.hanhThuy {
     font-weight: bold;
 }
 
+.thienban{
+    font-size: 1em !important;
+}
+
+.hanhKim {
+    fill: gray;
+}
+
+.hanhMoc {
+    fill: green;
+}
+
+.hanhThuy {
+    fill: black;
+}
+
 .hanhHoa {
-    fill: #a20500;
+    fill: red;
 }
 
 .hanhTho {
-    fill: #c4c400;
+    fill: rgb(255, 193, 21);
+}
+
+.none{
+    fill: rgb(0, 60, 255) !important;
+    font-weight: bold;
+}
+
+.bold{
+    font-weight: bolder;
+}
+
+.blue{
+    fill: rgb(0, 60, 255);
+}
+
+.tuantriet{
+    fill: white !important;
+}
+
+.horizontal{
+    display: flex;
+    margin: 0.5rem;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+}
+
+.horizontal .input-wrapper{
+    width: 33% !important;
+    margin: 0;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+}
+
+button.secondary {
+    font-family: "Lexend", sans-serif;
+    background-color: transparent;
+    color: #ffd; 
+    border: rgba(255, 255, 200, 0.1) solid 1px;
+    border-radius: 0.3rem;
+    padding: 0.3rem;
+}
+
+button.secondary:hover{
+    background-color: rgba(255, 255, 200, 0.2); /* Darker green on hover */
+}
+
+button.secondary:focus{
+    outline: none;
+}
+
+#svg-controls{
+    display: flex;
+    justify-content: space-between;
+}
+
+.arrow{
+    fill: red;
+    stroke: red;
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+
+.hoaChu{
+    fill: red;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.red{
+    fill: red;
+}
+
+.nghieng{
+    font-style: italic;
+}
+
+#printable{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: normal;
+    font-size: 15px;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0.5rem
+}
+
+@media screen {
+    #printable{
+        display: none;
+    }
+}
+
+
+@media print {
+    html{
+        all: unset;
+    }
+    .main{
+        display: none;
+    }
+    #printable{
+        display: block;
+        width: max-content;
+        height: max-content;
+    }
 }

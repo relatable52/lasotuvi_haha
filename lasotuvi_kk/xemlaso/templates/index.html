@@ -18,7 +18,10 @@
     <!-- Include jQuery UI JavaScript -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
+    <script src="{% static "d3-save-svg.min.js" %}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 
 <body>
@@ -32,7 +35,7 @@
                     <form id="lstv">
                         <div class="input-wrapper">
                             <div class="label">Họ và tên</div>
-                            <input type="text" name="hoten" id="hoten" placeholder="Lá số tử vi" class="transparent-input">
+                            <input type="text" value="FB: Khâm Thiên Tứ Hóa" name="hoten" id="hoten" class="transparent-input">
                         </div>
                         <div class="input-wrapper">
                             <div class="label">Giới tính</div>
@@ -50,16 +53,34 @@
                             </div>
                         </div>
                         <div class="input-wrapper">
-                            <div class="label">Ngày tháng năm sinh</div>
-                            <input type="text" id="date-picker" name="date" class="transparent-input" placeholder="DD/MM/YYYY">
-                        </div>
-                        <div class="input-wrapper">
                             <div>
                                 <div class="label">Chọn lịch</div>
-                                <select name="amLich" required class="transparent-input">
-                                    <option value="off">Dương Lịch</option>
-                                    <option value="on">Âm Lịch</option>
-                                </select>
+                                <div class="gender_btn_wrapper">
+                                    <label class="radio_btn selected">
+                                        <label for="duonglich">Dương Lịch</label>
+                                        <input type="radio" id="duonglich" name="amLich" value="off" onclick="selectRadio(this)" checked>
+                                        <span class="custom-radio"></span>
+                                    </label>
+                                    <label class="radio_btn">
+                                        <label for="amlich">Âm Lịch</label>
+                                        <input type="radio" id="amlich" name="amLich" value="on" onclick="selectRadio(this)">
+                                        <span class="custom-radio"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="horizontal">
+                            <div class="input-wrapper">
+                                <div class="label">Năm sinh</div>
+                                <select name="year" id="year-select" class="transparent-input"></select>
+                            </div>
+                            <div class="input-wrapper">
+                                <div class="label">Tháng sinh</div>
+                                <select name="month" id="month-select" class="transparent-input"></select>
+                            </div>
+                            <div class="input-wrapper">
+                                <div class="label">Ngày sinh</div>
+                                <select name="date" id="day-select" class="transparent-input"></select>
                             </div>
                         </div>
                         <div class="input-wrapper">
@@ -125,17 +146,69 @@
         <div class="laso hide main" id="laso">
             <div class="laso_panel container">
                 <h3 class="wordmark">Tùy chỉnh lá số</h3>
-                <input type="button" class="button secondary" value="Thay đổi thông tin" onclick="toggle()">
+                <div>
+                    <button id="velaso1" class="secondary"> Lá số Tam Hợp</button>
+                    <button id="velaso2" class="secondary"> Lá số Tam Hợp Đài Loan</button>
+                    <button id="velaso3" class="secondary"> Lá số Khâm Thiên</button>
+                </div>
+                <input type="button" class="button primary" value="Thay đổi thông tin" onclick="toggle()">
             </div>
             <div class="chart-container container">
                 <h3 class="wordmark">Lá số</h3>
-                <button id="resetButton">🏠</button>
+                <div id="svg-controls">
+                    <div>
+                        <button id="zoomOutButton" onclick="zoomOut()" class="secondary">
+                            <span class="material-symbols-outlined">
+                                zoom_out
+                            </span>
+                        </button>
+                        <button id="zoomInButton" onclick="zoomIn()" class="secondary">
+                            <span class="material-symbols-outlined">
+                            zoom_in
+                            </span>
+                        </button>
+                        <button  id="resetButton" onclick="resetZoom()" class="secondary">
+                            <span class="material-symbols-outlined">
+                            home
+                            </span>
+                        </button>
+                        <button id="fitToWidth" onclick="fitToWidth()" class="secondary">
+                            <span class="material-symbols-outlined">
+                            code
+                            </span>
+                        </button>
+                        <button id="fitToHeight" onclick="fitToHeight()" class="secondary">
+                            <span class="material-symbols-outlined">
+                            expand_all
+                            </span>
+                        </button>
+                    </div>
+                    <div>
+                        <button class="secondary" onclick="download()">
+                            <span class="material-symbols-outlined">
+                            download
+                            </span>
+                        </button>
+                        <button class="secondary" onclick="print()">
+                            <span class="material-symbols-outlined">
+                            print
+                            </span>
+                        </button>
+                    </div>
+                </div>
                 <div id="chart"></div>
             </div>
         </div>
     </div>
+    <div id="printable">
+        
+    </div>
 </body>
 <footer>
+    <script src="{% static "svg.js" %}"></script>
+    <script src="{% static "lunar.js" %}"></script>
+    <script src="{% static "datepicker.js" %}"></script>
+    <script src="{% static "drawing.js" %}"></script>
     <script src="{% static "lasotuvi.js" %}"></script>
 </footer>
 </html>
