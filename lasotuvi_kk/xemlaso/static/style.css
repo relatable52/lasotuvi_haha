@@ -299,6 +299,7 @@ select{
 
 .small{
     font-size: 0.8em;
+    font-weight: 450;
 }
 
 .smaller{
@@ -319,11 +320,11 @@ select{
 }
 
 .hanhKim {
-    fill: gray;
+    fill: rgb(165, 165, 165);
 }
 
 .hanhMoc {
-    fill: green;
+    fill: rgb(1, 177, 1);
 }
 
 .hanhThuy {
@@ -344,7 +345,7 @@ select{
 }
 
 .bold{
-    font-weight: bolder;
+    font-weight:bolder;
 }
 
 .blue{

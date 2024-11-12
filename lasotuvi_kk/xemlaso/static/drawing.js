@@ -337,12 +337,12 @@ function velaso(laso, loaiLaSo = 0){
     for(let i=1; i<13; i++){
         cell = data[i];
         drawCell(cell, loaiLaSo);
-        let start = (24+chieu*(i - chiNam))%12+1; 
+        let start = (24+(i - chiNam))%12+1; 
         let tuoiText = start;
         for(let j = 1; j < 9; j++){
             tuoiText += ", " + (start + 12*j);
         }
-        addText(tuoiText, (cung[cell.cungTen][0]-1)*cell_width+cell_width/2, (cung[cell.cungTen][1]-1)*cell_height+down-stepy, "tiny bold");
+        addText(tuoiText, (cung[cell.cungTen][0]-1)*cell_width+cell_width/2, (cung[cell.cungTen][1]-1)*cell_height+down-stepy, "smaller blue bold");
         if('tuanTrung' in cell){
             tuan = i;
         }
@@ -392,7 +392,7 @@ function velaso(laso, loaiLaSo = 0){
 
     var left1 = cell_width*1.25;
     var left2 = cell_width*1.8;
-    var up1 = cell_height*1.3;
+    var up1 = cell_height*1.4;
     var stepy1 = cell_width/10;
     var stepx1 = cell_width/6;
 
@@ -409,20 +409,20 @@ function velaso(laso, loaiLaSo = 0){
         ["Cục", 11, tb.tenCuc, ""],
         ["Thân chủ", 14, tb.thanChu, ""],
         ["Mệnh chủ", 13, tb.menhChu, ""],
-        ["", 16, tb.amDuongMenh],
-        ["", 17, tb.sinhKhac]
+        [tb.amDuongMenh, 16, ""],
+        [tb.sinhKhac, 17, ""]
     ]
-    addText('Lá số tử vi', width/2, 1.1*height/4, "title blue");
-    addText('https://khamthientuhoa.com.vn', width/2, 1.2*height/4, "thienban red");
-    addText('Đặt lịch luận giải tử vi qua FB:', width/4 + stepx1/2, 3*height/4 - 2.2*stepy1, "thienban red nghieng", "start");
-    addText('Fb/khamthientuhoaminhphuong/', width/4 + stepx1/2, 3*height/4 - 1.2*stepy1, "thienban red nghieng", "start");
+    addText('LÁ SỐ TỬ VI', width/2, 1.2*height/4, "title blue");
+    addText('https://khamthientuhoa.com.vn', width/2, 1.3*height/4, "thienban red");
+    addText('Fb/khamthientuhoaminhphuong/', width/4 + stepx1/2, 3*height/4 - 2.2*stepy1, "thienban red nghieng", "start");
+    //addText('Fb/khamthientuhoaminhphuong/', width/4 + stepx1/2, 3*height/4 - 1.2*stepy1, "thienban red nghieng", "start");
     for(let i=0; i<thienBanText.length; i++){
         addText(thienBanText[i][0], left1, up1 + thienBanText[i][1]*stepy1, "thienban bold", "start");
         addText(thienBanText[i][2], left2, up1 + thienBanText[i][1]*stepy1, "thienban blue bold", "start");
         addText(thienBanText[i][3], left2 + 2.5*stepx1, up1 + thienBanText[i][1]*stepy1, "thienban blue bold", "start");
     }
 
-    d3.xml("static/bitmap.svg")  // Replace with the path to your external SVG file
+    d3.xml("static/converted_image.svg")  // Replace with the path to your external SVG file
     .then(function(data) {
         const externalSvg = data.documentElement;
 
