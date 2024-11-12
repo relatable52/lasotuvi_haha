@@ -120,96 +120,96 @@ diaChi = [
         "id": 1,
         "tenChi": "Tý",
         "tenHanh": "T",
-        "menhChu": "Tham lang",
-        "thanChu": "Linh tinh",
+        "menhChu": "Tham Lang",
+        "thanChu": "Linh Tinh",
         "amDuong": 1
     },
     {
         "id": 2,
         "tenChi": "Sửu",
         "tenHanh": "O",
-        "menhChu": "Cự môn",
-        "thanChu": "Thiên tướng",
+        "menhChu": "Cự Môn",
+        "thanChu": "Thiên Tướng",
         "amDuong": -1
     },
     {
         "id": 3,
         "tenChi": "Dần",
         "tenHanh": "M",
-        "menhChu": "Lộc tồn",
-        "thanChu": "Thiên lương",
+        "menhChu": "Lộc Tồn",
+        "thanChu": "Thiên Lương",
         "amDuong": 1
     },
     {
         "id": 4,
         "tenChi": "Mão",
         "tenHanh": "M",
-        "menhChu": "Văn khúc",
-        "thanChu": "Thiên đồng",
+        "menhChu": "Văn Khúc",
+        "thanChu": "Thiên Đồng",
         "amDuong": -1
     },
     {
         "id": 5,
         "tenChi": "Thìn",
         "tenHanh": "O",
-        "menhChu": "Liêm trinh",
-        "thanChu": "Văn xương",
+        "menhChu": "Liêm Trinh",
+        "thanChu": "Văn Xương",
         "amDuong": 1
     },
     {
         "id": 6,
         "tenChi": "Tỵ",
         "tenHanh": "H",
-        "menhChu": "Vũ khúc",
-        "thanChu": "Thiên cơ",
+        "menhChu": "Vũ Khúc",
+        "thanChu": "Thiên Cơ",
         "amDuong": -1
     },
     {
         "id": 7,
         "tenChi": "Ngọ",
         "tenHanh": "H",
-        "menhChu": "Phá quân",
-        "thanChu": "Hỏa tinh",
+        "menhChu": "Phá Quân",
+        "thanChu": "Hỏa Tinh",
         "amDuong": 1
     },
     {
         "id": 8,
         "tenChi": "Mùi",
         "tenHanh": "O",
-        "menhChu": "Vũ khúc",
-        "thanChu": "Thiên tướng",
+        "menhChu": "Vũ Khúc",
+        "thanChu": "Thiên Tướng",
         "amDuong": -1
     },
     {
         "id": 9,
         "tenChi": "Thân",
         "tenHanh": "K",
-        "menhChu": "Liêm trinh",
-        "thanChu": "Thiên lương",
+        "menhChu": "Liêm Trinh",
+        "thanChu": "Thiên Lương",
         "amDuong": 1
     },
     {
         "id": 10,
         "tenChi": "Dậu",
         "tenHanh": "K",
-        "menhChu": "Văn khúc",
-        "thanChu": "Thiên đồng",
+        "menhChu": "Văn Khúc",
+        "thanChu": "Thiên Đồng",
         "amDuong": -1
     },
     {
         "id": 11,
         "tenChi": "Tuất",
         "tenHanh": "O",
-        "menhChu": "Lộc tồn",
-        "thanChu": "Văn xương",
+        "menhChu": "Lộc Tồn",
+        "thanChu": "Văn Xương",
         "amDuong": 1
     },
     {
         "id": 12,
         "tenChi": "Hợi",
         "tenHanh": "T",
-        "menhChu": "Cự môn",
-        "thanChu": "Thiên cơ",
+        "menhChu": "Cự Môn",
+        "thanChu": "Thiên Cơ",
         "amDuong": -1
     }
 ]

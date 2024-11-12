@@ -639,13 +639,13 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     diaBan.nhapSao(viTriHoaKy, luuTVKy)
 # Lưu vòng thái tuế
     viTriLuuThaiTue = chiNamXem
-    diaBan.nhapSao(viTriThaiTue, luuThaiTue)
+    diaBan.nhapSao(viTriLuuThaiTue, luuThaiTue)
 
     #viTriThieuDuong = dichCung(viTriThaiTue, 1)
     #diaBan.nhapSao(viTriThieuDuong, saoThieuDuong, saoThienKhong)
 
-    viTriTangMon = dichCung(viTriThaiTue, 2)
-    diaBan.nhapSao(viTriTangMon, luuTangMon)
+    viTriLuuTangMon = dichCung(viTriThaiTue, 2)
+    diaBan.nhapSao(viTriLuuTangMon, luuTangMon)
 
     #viTriThieuAm = dichCung(viTriThaiTue, 3)
     #diaBan.nhapSao(viTriThieuAm, saoThieuAm)
@@ -662,8 +662,8 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     #viTriLongDuc = dichCung(viTriThaiTue, 7)
     #diaBan.nhapSao(viTriLongDuc, saoLongDuc)
 
-    viTriBachHo = dichCung(viTriThaiTue, 8)
-    diaBan.nhapSao(viTriBachHo, luuBachHo)
+    viTriLuuBachHo = dichCung(viTriThaiTue, 8)
+    diaBan.nhapSao(viTriLuuBachHo, luuBachHo)
 
     #viTriPhucDuc = dichCung(viTriThaiTue, 9)
     #diaBan.nhapSao(viTriPhucDuc, saoPhucDuc, saoThienDuc)
