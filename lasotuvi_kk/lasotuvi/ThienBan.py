@@ -23,7 +23,7 @@ class lapThienBan(object):
         self.canGioSinh = canGioSinh
         self.gioSinh = "{} {}".format(thienCan[canGioSinh]['tenCan'],
                                       chiGioSinh['tenChi'])
-
+        self.giosinhSo = chiGioSinh['giosinhSo']
         self.timeZone = timeZone
         self.today = time.strftime("%d/%m/%Y")
         self.ngayDuong, self.thangDuong, self.namDuong, self.ten = \
@@ -37,7 +37,10 @@ class lapThienBan(object):
         else:
             self.ngayAm, self.thangAm, self.namAm = self.ngayDuong,\
                 self.thangDuong, self.namDuong
-
+        _, _, namxemamlich, _ = ngayThangNam(1, 6, namxem, True, timeZone)
+        _, _, self.canNamXem, self.chiNamXem = ngayThangNamCanChi(1, 1, namxemamlich, timeZone)
+        self.canNamXemTen = thienCan[self.canNamXem]['tenCan']
+        self.chiNamXemTen = diaChi[self.chiNamXem]['tenChi']
         self.canThang, self.chiThang,  self.canNam, self.chiNam = \
             ngayThangNamCanChi(self.ngayAm, self.thangAm,
                                self.namAm, False, self.timeZone)
@@ -71,14 +74,14 @@ class lapThienBan(object):
         menhId = nguHanh(self.menh)['id']
         menhCuc = sinhKhac(menhId, self.hanhCuc)
         if menhCuc == 1:
-            self.sinhKhac = "Bản Mệnh sinh Cục"
+            self.sinhKhac = "Mệnh sinh Cục"
         elif menhCuc == -1:
-            self.sinhKhac = "Bản Mệnh khắc Cục"
+            self.sinhKhac = "Mệnh khắc Cục"
         elif menhCuc == -1j:
-            self.sinhKhac = "Cục khắc Bản Mệnh"
+            self.sinhKhac = "Cục khắc Mệnh"
         elif menhCuc == 1j:
-            self.sinhKhac = "Cục sinh Bản mệnh"
+            self.sinhKhac = "Cục sinh Mệnh"
         else:
-            self.sinhKhac = "Cục hòa Bản Mệnh"
+            self.sinhKhac = "Cục Mệnh bình hòa"
 
         self.banMenh = nguHanhNapAm(self.chiNam, self.canNam, True)
