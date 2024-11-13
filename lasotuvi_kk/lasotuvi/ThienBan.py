@@ -23,7 +23,7 @@ class lapThienBan(object):
         self.canGioSinh = canGioSinh
         self.gioSinh = "{} {}".format(thienCan[canGioSinh]['tenCan'],
                                       chiGioSinh['tenChi'])
-
+        self.giosinhSo = chiGioSinh['giosinhSo']
         self.timeZone = timeZone
         self.today = time.strftime("%d/%m/%Y")
         self.ngayDuong, self.thangDuong, self.namDuong, self.ten = \
@@ -37,7 +37,10 @@ class lapThienBan(object):
         else:
             self.ngayAm, self.thangAm, self.namAm = self.ngayDuong,\
                 self.thangDuong, self.namDuong
-
+        _, _, namxemamlich, _ = ngayThangNam(1, 6, namxem, True, timeZone)
+        _, _, self.canNamXem, self.chiNamXem = ngayThangNamCanChi(1, 1, namxemamlich, timeZone)
+        self.canNamXemTen = thienCan[self.canNamXem]['tenCan']
+        self.chiNamXemTen = diaChi[self.chiNamXem]['tenChi']
         self.canThang, self.chiThang,  self.canNam, self.chiNam = \
             ngayThangNamCanChi(self.ngayAm, self.thangAm,
                                self.namAm, False, self.timeZone)

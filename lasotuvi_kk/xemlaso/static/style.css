@@ -368,6 +368,10 @@ select{
     font-weight: bold;
 }
 
+.big{
+    font-size: 1.2em;
+}
+
 .bold{
     font-weight:bolder;
 }
@@ -375,6 +379,8 @@ select{
 .blue{
     fill: rgb(0, 60, 255);
 }
+
+
 
 .tuantriet{
     fill: white !important;

@@ -141,13 +141,28 @@ function velaso(laso, loaiLaSo = 0){
     };
 
     var up = cell_height/16;
-    var left = cell_width*0.02;
+    var left = cell_width*0.01;
     var down = 15*cell_height/16;
-    var stepy = cell_height*0.0545;
-    var right = cell_width*0.98;
+    var stepy = cell_height*0.07;
+    var right = cell_width*0.99;
     var stepx = cell_width/7;
-    var middle_left = cell_width*0.05;
-    var middle_right = cell_width*0.95;
+    var middle_left = cell_width*0.03;
+    var middle_right = cell_width*0.97;
+
+    var dau = [
+        [0.5, -1],
+        [-0.5, -1],
+        [-1, -1],
+        [-1, -0.5], 
+        [-1, 0.5],
+        [-1, 1],
+        [-0.5, 1], 
+        [0.5, 1],
+        [1, 1],
+        [1, 0.5],
+        [1, -0.5],
+        [1, -1]
+    ]
 
     function drawCell(data, loaiLaSo = loaiLaSo){
         var soSaoChinh = 0;
@@ -155,6 +170,7 @@ function velaso(laso, loaiLaSo = 0){
         var soSaoXau = 0;
         var saohoaText = '';
         var saos = (loaiLaSo == 3)?data.cungSao.slice().reverse():data.cungSao;
+
         for(let sao of saos){
             if(sao.saoLoai == 1){
                 soSaoChinh += 1;
@@ -166,7 +182,7 @@ function velaso(laso, loaiLaSo = 0){
                     chinhTinhText, 
                     (cung[data.cungTen][0]-1)*cell_width+cell_width/2, 
                     (cung[data.cungTen][1]-1)*cell_height+up+(soSaoChinh+0.5)*stepy,
-                    sao.cssSao + " bold"
+                    sao.cssSao + " big bold" 
                 );
             }
             if(sao.vongTrangSinh == 1){
@@ -229,7 +245,7 @@ function velaso(laso, loaiLaSo = 0){
                         chinhTinhText, 
                         (cung[data.cungTen][0]-1)*cell_width+cell_width/2, 
                         (cung[data.cungTen][1]-1)*cell_height+up+(soSaoChinh+0.5)*stepy,
-                        sao.cssSao + " bold"
+                        sao.cssSao + " big bold"
                     );
                 }
                 if(hoaIDs.includes(sao.saoID)){
@@ -254,20 +270,7 @@ function velaso(laso, loaiLaSo = 0){
                 11:3,
                 12:0,
             }
-            var dau = [
-                [0.5, -1],
-                [-0.5, -1],
-                [-1, -1],
-                [-1, -0.5], 
-                [-1, 0.5],
-                [-1, 1],
-                [-0.5, 1], 
-                [0.5, 1],
-                [1, 1],
-                [1, 0.5],
-                [1, -0.5],
-                [1, -1]
-            ]
+           
             var x1, y1, x2, y2;
             if(viTri[data.cungSo] == 0){
                 x1 = (cung[data.cungTen][0]-1)*cell_width + cell_width/2;
@@ -334,8 +337,17 @@ function velaso(laso, loaiLaSo = 0){
     var tuan = 0;
     var triet = 0;
 
+    var menhId = 0;
+    var taiId = 0;
+    var quanId = 0;
+    var diId = 0;
+
     for(let i=1; i<13; i++){
         cell = data[i];
+        if(cell.cungChucId == 1) menhId = i;
+        if(cell.cungChucId == 9) taiId = i;
+        if(cell.cungChucId == 5) quanId = i;
+        if(cell.cungChucId == 7) diId = i;
         drawCell(cell, loaiLaSo);
         let start = (24+(i - chiNam))%12+1; 
         let tuoiText = start;
@@ -387,28 +399,52 @@ function velaso(laso, loaiLaSo = 0){
         .attr("class", "rect-style");
         addText("Tuần - Triệt", vitriTuanTriet[triet][0], vitriTuanTriet[triet][1], "small bold tuantriet", "middle");
     }
-    
-    
 
-    var left1 = cell_width*1.25;
-    var left2 = cell_width*1.8;
+    function veTamGiac(menh, tai, quan, di){
+        var duong = [
+            [menh, di],
+            [tai, quan],
+            [menh, tai],
+            [menh, quan]
+        ]
+
+        for(let i of duong){
+            var x1 = width/2 + cell_width*dau[i[0]-1][0];
+            var y1 = height/2 - cell_height*dau[i[0]-1][1];
+            var x2 = width/2 + cell_width*dau[i[1]-1][0];
+            var y2 = height/2 - cell_height*dau[i[1]-1][1];
+
+            svg.append("line")
+                .attr("x1", x1)  // Starting point x
+                .attr("y1", y1)  // Starting point y
+                .attr("x2", x2) // Ending point x
+                .attr("y2", y2) // Ending point y
+                .attr("stroke", "gray")
+                .attr("stroke-width", 1);
+        }
+    }
+
+    veTamGiac(menhId, taiId, quanId, diId);
+    
+    var left1 = cell_width*1.2;
+    var left2 = cell_width*1.75;
     var up1 = cell_height*1.4;
     var stepy1 = cell_width/10;
     var stepx1 = cell_width/6;
 
     var thienBanText = [
-        ["Họ tên", 0, tb.ten, ""],
-        ["Năm", 1, tb.namDuong, tb.canNamTen + " " + tb.chiNamTen],
-        ["Tháng", 2, tb.thangDuong, tb.canThangTen + " " + tb.chiThangTen],
-        ["Ngày", 3, tb.ngayDuong, tb.canNgayTen + " " + tb.chiNgayTen],
-        ["Giờ", 4, tb.gioSinh, ""],
-        ["Năm xem", 6, tb.namxem, ""],
-        ["Tuổi", 7, tb.tuoi, ""],
-        ["Âm Dương", 9, tb.amDuongNamSinh + " " + tb.namNu, ""],
-        ["Mệnh", 10, tb.banMenh, ""],
-        ["Cục", 11, tb.tenCuc, ""],
-        ["Thân chủ", 14, tb.thanChu, ""],
-        ["Mệnh chủ", 13, tb.menhChu, ""],
+        ["Họ tên:", 0, tb.ten, ""],
+        ["Năm:", 1, tb.namDuong, tb.canNamTen + " " + tb.chiNamTen],
+        ["Tháng:", 2, tb.thangDuong + " "+ "(" + tb.thangAm + ")", tb.canThangTen + " " + tb.chiThangTen],
+        ["Ngày:", 3, tb.ngayDuong + " " + "(" + tb.ngayAm + ")", tb.canNgayTen + " " + tb.chiNgayTen],
+        ["Giờ:", 4, tb.giosinhSo, tb.gioSinh],
+        ["Năm xem:", 6, tb.namxem, tb.canNamXemTen + " " + tb.chiNamXemTen],
+        ["Tuổi:", 7, tb.tuoi, ""],
+        ["Âm Dương:", 9, tb.amDuongNamSinh + " " + tb.namNu, ""],
+        ["Mệnh:", 10, tb.banMenh, ""],
+        ["Cục:", 11, tb.tenCuc, ""],
+        ["Thân chủ:", 14, tb.thanChu, ""],
+        ["Mệnh chủ:", 13, tb.menhChu, ""],
         [tb.amDuongMenh, 16, ""],
         [tb.sinhKhac, 17, ""]
     ]
@@ -419,7 +455,7 @@ function velaso(laso, loaiLaSo = 0){
     for(let i=0; i<thienBanText.length; i++){
         addText(thienBanText[i][0], left1, up1 + thienBanText[i][1]*stepy1, "thienban bold", "start");
         addText(thienBanText[i][2], left2, up1 + thienBanText[i][1]*stepy1, "thienban blue bold", "start");
-        addText(thienBanText[i][3], left2 + 2.5*stepx1, up1 + thienBanText[i][1]*stepy1, "thienban blue bold", "start");
+        addText(thienBanText[i][3], left2 + 4*stepx1, up1 + thienBanText[i][1]*stepy1, "thienban blue bold", "start");
     }
 
     d3.xml("static/converted_image.svg")  // Replace with the path to your external SVG file
@@ -521,12 +557,38 @@ function velaso3(){
     velaso(lasoData, 3);
 }
 
-function download(){
+function download(filename = 'downloaded_image.png'){
     const svgElement = d3.select("#chart svg").node();
-    var config = {
-        filename: 'laso',
-    }
-    d3_save_svg.save(svgElement, config);
+    
+    var svgString = preprocess(svgElement).source;
+    
+    const img = new Image();
+    const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(svgBlob);
+
+    img.onload = () => {
+        // Draw SVG image onto a canvas
+        const canvas = document.createElement('canvas');
+        canvas.width = svgElement.clientWidth;
+        canvas.height = svgElement.clientHeight;
+        const context = canvas.getContext('2d');
+        context.drawImage(img, 0, 0);
+
+        // Create a PNG download link
+        const pngUrl = canvas.toDataURL('image/png');
+        const downloadLink = document.createElement('a');
+        downloadLink.href = pngUrl;
+        downloadLink.download = filename;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+
+        // Clean up
+        URL.revokeObjectURL(url);
+    };
+
+    // Start loading the image
+    img.src = url;
 }
 
 // function print(){

@@ -119,6 +119,7 @@ diaChi = [
     {
         "id": 1,
         "tenChi": "Tý",
+        "giosinhSo": "23 giờ - 1 giờ",
         "tenHanh": "T",
         "menhChu": "Tham Lang",
         "thanChu": "Linh Tinh",
@@ -127,6 +128,7 @@ diaChi = [
     {
         "id": 2,
         "tenChi": "Sửu",
+        "giosinhSo": "1 giờ - 3 giờ",
         "tenHanh": "O",
         "menhChu": "Cự Môn",
         "thanChu": "Thiên Tướng",
@@ -135,6 +137,7 @@ diaChi = [
     {
         "id": 3,
         "tenChi": "Dần",
+        "giosinhSo": "3 giờ - 5 giờ",
         "tenHanh": "M",
         "menhChu": "Lộc Tồn",
         "thanChu": "Thiên Lương",
@@ -143,6 +146,7 @@ diaChi = [
     {
         "id": 4,
         "tenChi": "Mão",
+        "giosinhSo": "5 giờ - 7 giờ",
         "tenHanh": "M",
         "menhChu": "Văn Khúc",
         "thanChu": "Thiên Đồng",
@@ -151,6 +155,7 @@ diaChi = [
     {
         "id": 5,
         "tenChi": "Thìn",
+        "giosinhSo": "7 giờ - 9 giờ",
         "tenHanh": "O",
         "menhChu": "Liêm Trinh",
         "thanChu": "Văn Xương",
@@ -159,6 +164,7 @@ diaChi = [
     {
         "id": 6,
         "tenChi": "Tỵ",
+        "giosinhSo": "9 giờ - 11 giờ",
         "tenHanh": "H",
         "menhChu": "Vũ Khúc",
         "thanChu": "Thiên Cơ",
@@ -167,6 +173,7 @@ diaChi = [
     {
         "id": 7,
         "tenChi": "Ngọ",
+        "giosinhSo": "11 giờ - 13 giờ",
         "tenHanh": "H",
         "menhChu": "Phá Quân",
         "thanChu": "Hỏa Tinh",
@@ -175,6 +182,7 @@ diaChi = [
     {
         "id": 8,
         "tenChi": "Mùi",
+        "giosinhSo": "13 giờ - 15 giờ",
         "tenHanh": "O",
         "menhChu": "Vũ Khúc",
         "thanChu": "Thiên Tướng",
@@ -183,6 +191,7 @@ diaChi = [
     {
         "id": 9,
         "tenChi": "Thân",
+        "giosinhSo": "15 giờ - 17 giờ",
         "tenHanh": "K",
         "menhChu": "Liêm Trinh",
         "thanChu": "Thiên Lương",
@@ -191,6 +200,7 @@ diaChi = [
     {
         "id": 10,
         "tenChi": "Dậu",
+        "giosinhSo": "17 giờ - 19 giờ",
         "tenHanh": "K",
         "menhChu": "Văn Khúc",
         "thanChu": "Thiên Đồng",
@@ -199,6 +209,7 @@ diaChi = [
     {
         "id": 11,
         "tenChi": "Tuất",
+        "giosinhSo": "19 giờ - 21 giờ",
         "tenHanh": "O",
         "menhChu": "Lộc Tồn",
         "thanChu": "Văn Xương",
@@ -207,6 +218,7 @@ diaChi = [
     {
         "id": 12,
         "tenChi": "Hợi",
+        "giosinhSo": "21 giờ - 23 giờ",
         "tenHanh": "T",
         "menhChu": "Cự Môn",
         "thanChu": "Thiên Cơ",
@@ -298,7 +310,7 @@ def ngayThangNamCanChi(nn, tt, nnnn, duongLich=True, timeZone=7):
             ngayThangNam(nn, tt, nnnn, timeZone=timeZone)
     # Can của tháng
     canThang = (nnnn * 12 + tt + 3) % 10 + 1
-    chiThang = (tt + 1) % 12 + 1
+    chiThang = tt
     # Can chi của năm
     canNamSinh = (nnnn + 6) % 10 + 1
     chiNam = (nnnn + 8) % 12 + 1
@@ -535,7 +547,7 @@ def timHoaLinh(chiNamSinh, gioSinh, gioiTinh, amDuongNamSinh):
 
 
 def timThienKhoi(canNam):
-    khoiViet = [None, 2, 1, 12, 10, 8, 1, 8, 7, 6, 4]
+    khoiViet = [None, 2, 1, 12, 12, 2, 1, 3, 3, 4, 4]
     try:
         return khoiViet[canNam]
     except:
