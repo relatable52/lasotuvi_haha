@@ -141,13 +141,13 @@ function velaso(laso, loaiLaSo = 0){
     };
 
     var up = cell_height/16;
-    var left = cell_width*0.02;
+    var left = cell_width*0.01;
     var down = 15*cell_height/16;
-    var stepy = cell_height*0.0545;
-    var right = cell_width*0.98;
+    var stepy = cell_height*0.07;
+    var right = cell_width*0.99;
     var stepx = cell_width/7;
-    var middle_left = cell_width*0.05;
-    var middle_right = cell_width*0.95;
+    var middle_left = cell_width*0.03;
+    var middle_right = cell_width*0.97;
 
     function drawCell(data, loaiLaSo = loaiLaSo){
         var soSaoChinh = 0;
@@ -166,7 +166,7 @@ function velaso(laso, loaiLaSo = 0){
                     chinhTinhText, 
                     (cung[data.cungTen][0]-1)*cell_width+cell_width/2, 
                     (cung[data.cungTen][1]-1)*cell_height+up+(soSaoChinh+0.5)*stepy,
-                    sao.cssSao + " bold"
+                    sao.cssSao + " big bold" 
                 );
             }
             if(sao.vongTrangSinh == 1){
@@ -229,7 +229,7 @@ function velaso(laso, loaiLaSo = 0){
                         chinhTinhText, 
                         (cung[data.cungTen][0]-1)*cell_width+cell_width/2, 
                         (cung[data.cungTen][1]-1)*cell_height+up+(soSaoChinh+0.5)*stepy,
-                        sao.cssSao + " bold"
+                        sao.cssSao + " big bold"
                     );
                 }
                 if(hoaIDs.includes(sao.saoID)){
@@ -337,12 +337,12 @@ function velaso(laso, loaiLaSo = 0){
     for(let i=1; i<13; i++){
         cell = data[i];
         drawCell(cell, loaiLaSo);
-        let start = (24+chieu*(i - chiNam))%12+1; 
+        let start = (24+(i - chiNam))%12+1; 
         let tuoiText = start;
         for(let j = 1; j < 9; j++){
             tuoiText += ", " + (start + 12*j);
         }
-        addText(tuoiText, (cung[cell.cungTen][0]-1)*cell_width+cell_width/2, (cung[cell.cungTen][1]-1)*cell_height+down-stepy, "tiny bold");
+        addText(tuoiText, (cung[cell.cungTen][0]-1)*cell_width+cell_width/2, (cung[cell.cungTen][1]-1)*cell_height+down-stepy, "smaller blue bold");
         if('tuanTrung' in cell){
             tuan = i;
         }
@@ -390,39 +390,39 @@ function velaso(laso, loaiLaSo = 0){
     
     
 
-    var left1 = cell_width*1.25;
-    var left2 = cell_width*1.8;
-    var up1 = cell_height*1.3;
+    var left1 = cell_width*1.2;
+    var left2 = cell_width*1.75;
+    var up1 = cell_height*1.4;
     var stepy1 = cell_width/10;
     var stepx1 = cell_width/6;
 
     var thienBanText = [
-        ["Họ tên", 0, tb.ten, ""],
-        ["Năm", 1, tb.namDuong, tb.canNamTen + " " + tb.chiNamTen],
-        ["Tháng", 2, tb.thangDuong, tb.canThangTen + " " + tb.chiThangTen],
-        ["Ngày", 3, tb.ngayDuong, tb.canNgayTen + " " + tb.chiNgayTen],
-        ["Giờ", 4, tb.gioSinh, ""],
-        ["Năm xem", 6, tb.namxem, ""],
-        ["Tuổi", 7, tb.tuoi, ""],
-        ["Âm Dương", 9, tb.amDuongNamSinh + " " + tb.namNu, ""],
-        ["Mệnh", 10, tb.banMenh, ""],
-        ["Cục", 11, tb.tenCuc, ""],
-        ["Thân chủ", 14, tb.thanChu, ""],
-        ["Mệnh chủ", 13, tb.menhChu, ""],
-        ["", 16, tb.amDuongMenh],
-        ["", 17, tb.sinhKhac]
+        ["Họ tên:", 0, tb.ten, ""],
+        ["Năm:", 1, tb.namDuong, tb.canNamTen + " " + tb.chiNamTen],
+        ["Tháng:", 2, tb.thangDuong + " "+ "(" + tb.thangAm + ")", tb.canThangTen + " " + tb.chiThangTen],
+        ["Ngày:", 3, tb.ngayDuong + " " + "(" + tb.ngayAm + ")", tb.canNgayTen + " " + tb.chiNgayTen],
+        ["Giờ:", 4, tb.giosinhSo, tb.gioSinh],
+        ["Năm xem:", 6, tb.namxem, tb.canNamXemTen + " " + tb.chiNamXemTen],
+        ["Tuổi:", 7, tb.tuoi, ""],
+        ["Âm Dương:", 9, tb.amDuongNamSinh + " " + tb.namNu, ""],
+        ["Mệnh:", 10, tb.banMenh, ""],
+        ["Cục:", 11, tb.tenCuc, ""],
+        ["Thân chủ:", 14, tb.thanChu, ""],
+        ["Mệnh chủ:", 13, tb.menhChu, ""],
+        [tb.amDuongMenh, 16, ""],
+        [tb.sinhKhac, 17, ""]
     ]
-    addText('Lá số tử vi', width/2, 1.1*height/4, "title blue");
-    addText('https://khamthientuhoa.com.vn', width/2, 1.2*height/4, "thienban red");
-    addText('Đặt lịch luận giải tử vi qua FB:', width/4 + stepx1/2, 3*height/4 - 2.2*stepy1, "thienban red nghieng", "start");
-    addText('Fb/khamthientuhoaminhphuong/', width/4 + stepx1/2, 3*height/4 - 1.2*stepy1, "thienban red nghieng", "start");
+    addText('LÁ SỐ TỬ VI', width/2, 1.2*height/4, "title blue");
+    addText('https://khamthientuhoa.com.vn', width/2, 1.3*height/4, "thienban red");
+    addText('Fb/khamthientuhoaminhphuong/', width/4 + stepx1/2, 3*height/4 - 2.2*stepy1, "thienban red nghieng", "start");
+    //addText('Fb/khamthientuhoaminhphuong/', width/4 + stepx1/2, 3*height/4 - 1.2*stepy1, "thienban red nghieng", "start");
     for(let i=0; i<thienBanText.length; i++){
         addText(thienBanText[i][0], left1, up1 + thienBanText[i][1]*stepy1, "thienban bold", "start");
         addText(thienBanText[i][2], left2, up1 + thienBanText[i][1]*stepy1, "thienban blue bold", "start");
-        addText(thienBanText[i][3], left2 + 2.5*stepx1, up1 + thienBanText[i][1]*stepy1, "thienban blue bold", "start");
+        addText(thienBanText[i][3], left2 + 4*stepx1, up1 + thienBanText[i][1]*stepy1, "thienban blue bold", "start");
     }
 
-    d3.xml("static/bitmap.svg")  // Replace with the path to your external SVG file
+    d3.xml("static/converted_image.svg")  // Replace with the path to your external SVG file
     .then(function(data) {
         const externalSvg = data.documentElement;
 
