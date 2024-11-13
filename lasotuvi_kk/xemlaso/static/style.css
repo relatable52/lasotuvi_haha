@@ -402,8 +402,6 @@ button.secondary {
     border: rgba(255, 255, 200, 0.1) solid 1px;
     border-radius: 0.3rem;
     padding: 0.3rem;
-    margin-top: 0.2rem;
-    box-sizing: border-box;
 }
 
 button.secondary:hover{
@@ -453,25 +451,6 @@ button.secondary:focus{
     padding: 0.5rem
 }
 
-.lasocontrols{
-    padding-top: 0.3rem;
-    padding-bottom: 0.3rem;
-    box-sizing: border-box;
-}
-
-.laso_panel a {
-    color: #FFA500; /* Yellow-orange color */
-    text-decoration: none; /* Remove underline */
-}
-
-.laso_panel a:hover {
-    color: #FF8C00; /* Darker shade on hover */
-}
-
-.laso_panel a:active {
-    color: #FF7F50; /* Shade when active (clicked) */
-}
-
 @media screen {
     #printable{
         display: none;
@@ -484,9 +463,6 @@ button.secondary:focus{
         all: unset;
     }
     .main{
-        display: none;
-    }
-    header{
         display: none;
     }
     #printable{
