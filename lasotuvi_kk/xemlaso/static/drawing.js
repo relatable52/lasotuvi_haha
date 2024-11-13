@@ -112,6 +112,18 @@ function velaso(laso, loaiLaSo = 0){
         const offset = 20; // Distance from the arrow tip
         const angle = Math.atan2(y2 - y1, x2 - x1);  // Angle of the line
 
+        const arrowSize = 8;
+        // Calculate triangle points based on the angle
+        const arrowX1 = x2 - arrowSize * Math.cos(angle - Math.PI / 6);
+        const arrowY1 = y2 - arrowSize * Math.sin(angle - Math.PI / 6);
+        const arrowX2 = x2 - arrowSize * Math.cos(angle + Math.PI / 6);
+        const arrowY2 = y2 - arrowSize * Math.sin(angle + Math.PI / 6);
+
+        // Append the triangle as a polygon
+        svg.append("polygon")
+            .attr("points", `${x2},${y2} ${arrowX1},${arrowY1} ${arrowX2},${arrowY2}`)
+            .attr("class", style);
+
         const labelX = x2 + offset * Math.cos(angle+3*Math.PI/6);
         const labelY = y2 + offset * Math.sin(angle+3*Math.PI/6);
 
@@ -390,13 +402,19 @@ function velaso(laso, loaiLaSo = 0){
     
     
 
+<<<<<<< HEAD
     var left1 = cell_width*1.2;
     var left2 = cell_width*1.75;
+=======
+    var left1 = cell_width*1.25;
+    var left2 = cell_width*1.8;
+>>>>>>> 73eca2581e4d2532178fa12b1b4b9a44394f842a
     var up1 = cell_height*1.4;
     var stepy1 = cell_width/10;
     var stepx1 = cell_width/6;
 
     var thienBanText = [
+<<<<<<< HEAD
         ["Họ tên:", 0, tb.ten, ""],
         ["Năm:", 1, tb.namDuong, tb.canNamTen + " " + tb.chiNamTen],
         ["Tháng:", 2, tb.thangDuong + " "+ "(" + tb.thangAm + ")", tb.canThangTen + " " + tb.chiThangTen],
@@ -409,6 +427,20 @@ function velaso(laso, loaiLaSo = 0){
         ["Cục:", 11, tb.tenCuc, ""],
         ["Thân chủ:", 14, tb.thanChu, ""],
         ["Mệnh chủ:", 13, tb.menhChu, ""],
+=======
+        ["Họ tên", 0, tb.ten, ""],
+        ["Năm", 1, tb.namDuong, tb.canNamTen + " " + tb.chiNamTen],
+        ["Tháng", 2, tb.thangDuong, tb.canThangTen + " " + tb.chiThangTen],
+        ["Ngày", 3, tb.ngayDuong, tb.canNgayTen + " " + tb.chiNgayTen],
+        ["Giờ", 4, tb.gioSinh, ""],
+        ["Năm xem", 6, tb.namxem, ""],
+        ["Tuổi", 7, tb.tuoi, ""],
+        ["Âm Dương", 9, tb.amDuongNamSinh + " " + tb.namNu, ""],
+        ["Mệnh", 10, tb.banMenh, ""],
+        ["Cục", 11, tb.tenCuc, ""],
+        ["Thân chủ", 14, tb.thanChu, ""],
+        ["Mệnh chủ", 13, tb.menhChu, ""],
+>>>>>>> 73eca2581e4d2532178fa12b1b4b9a44394f842a
         [tb.amDuongMenh, 16, ""],
         [tb.sinhKhac, 17, ""]
     ]
@@ -422,17 +454,21 @@ function velaso(laso, loaiLaSo = 0){
         addText(thienBanText[i][3], left2 + 4*stepx1, up1 + thienBanText[i][1]*stepy1, "thienban blue bold", "start");
     }
 
+<<<<<<< HEAD
     d3.xml("static/converted_image.svg")  // Replace with the path to your external SVG file
+=======
+    d3.xml("static/bitmap1.svg")  // Replace with the path to your external SVG file
+>>>>>>> 73eca2581e4d2532178fa12b1b4b9a44394f842a
     .then(function(data) {
         const externalSvg = data.documentElement;
 
         // Option 1: Change the location using x and y attributes
         d3.select(externalSvg)
-        .attr("x", 3*width/4 - 75)  // Move the external SVG to x=100
-        .attr("y", 3*height/4 - 75)  // Move the external SVG to y=100
-        .attr("width", 70)
-        .attr("height", 70)
-        .attr("viewBox", "0 0 70 70");
+        .attr("x", 3*width/4 - 115)  // Move the external SVG to x=100
+        .attr("y", 3*height/4 - 115)  // Move the external SVG to y=100
+        .attr("width", 110)
+        .attr("height", 110)
+        .attr("preserveAspectRatio", "xMinYMin meet");
 
         // Option 2: Use transform to move (this is more flexible)
         // d3.select(externalSvg)

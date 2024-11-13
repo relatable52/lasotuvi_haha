@@ -37,6 +37,11 @@ class cungDiaBan(object):
         self.cungChucId = cungChucId
         return self
     
+    
+    def cungChucId(self, cungChucId):
+        self.cungChucId = cungChucId
+        return self
+    
     def daiHan(self, daiHan):
         self.cungDaiHan = daiHan
         return self
@@ -90,6 +95,7 @@ class cungDiaBan(object):
                 self.huongTamID.append(i)
         return self
     
+    
 class diaBan(object):
     def __init__(self, thangSinhAmLich, gioSinhAmLich, tuoi):
         super(diaBan, self).__init__()
@@ -118,9 +124,13 @@ class diaBan(object):
             {
                 'cungChucId': 1,
                 'tenCung': "MỆNH",
+                'cungChucId': 1,
+                'tenCung': "MỆNH",
                 'cungSoDiaBan': self.cungMenh
             },
             {
+                'cungChucId': 2,
+                'tenCung': "PHỤ MẪU",
                 'cungChucId': 2,
                 'tenCung': "PHỤ MẪU",
                 'cungSoDiaBan': cungPhuMau
@@ -129,10 +139,14 @@ class diaBan(object):
             {
                 'cungChucId': 3,
                 'tenCung': "PHÚC ĐỨC",
+                'cungChucId': 3,
+                'tenCung': "PHÚC ĐỨC",
                 'cungSoDiaBan': cungPhucDuc
 
             },
             {
+                'cungChucId': 4,
+                'tenCung': "ĐIỀN TRẠCH",
                 'cungChucId': 4,
                 'tenCung': "ĐIỀN TRẠCH",
                 'cungSoDiaBan': cungDienTrach
@@ -141,10 +155,14 @@ class diaBan(object):
             {
                 'cungChucId': 5,
                 'tenCung': "QUAN LỘC",
+                'cungChucId': 5,
+                'tenCung': "QUAN LỘC",
                 'cungSoDiaBan': cungQuanLoc
 
             },
             {
+                'cungChucId': 6,
+                'tenCung': "NÔ BỘC",
                 'cungChucId': 6,
                 'tenCung': "NÔ BỘC",
                 'cungSoDiaBan': self.cungNoboc
@@ -153,10 +171,14 @@ class diaBan(object):
             {
                 'cungChucId': 7,
                 'tenCung': "THIÊN DI",
+                'cungChucId': 7,
+                'tenCung': "THIÊN DI",
                 'cungSoDiaBan': cungThienDi
 
             },
             {
+                'cungChucId': 8,
+                'tenCung': "TẬT ÁCH",
                 'cungChucId': 8,
                 'tenCung': "TẬT ÁCH",
                 'cungSoDiaBan': self.cungTatAch
@@ -165,10 +187,14 @@ class diaBan(object):
             {
                 'cungChucId': 9,
                 'tenCung': "TÀI BẠCH",
+                'cungChucId': 9,
+                'tenCung': "TÀI BẠCH",
                 'cungSoDiaBan': cungTaiBach
 
             },
             {
+                'cungChucId': 10,
+                'tenCung': "TỬ TỨC",
                 'cungChucId': 10,
                 'tenCung': "TỬ TỨC",
                 'cungSoDiaBan': cungTuTuc
@@ -177,10 +203,14 @@ class diaBan(object):
             {
                 'cungChucId': 11,
                 'tenCung': "PHU THÊ",
+                'cungChucId': 11,
+                'tenCung': "PHU THÊ",
                 'cungSoDiaBan': cungTheThiep
 
             },
             {
+                'cungChucId': 12,
+                'tenCung': "HUYNH ĐỆ",
                 'cungChucId': 12,
                 'tenCung': "HUYNH ĐỆ",
                 'cungSoDiaBan': cungHuynhDe
@@ -189,9 +219,12 @@ class diaBan(object):
         ]
         return cungChuThapNhiCung
        
+       
     def nhapCungChu(self):
         for cung in self.cungChu(self.thangSinhAmLich, self.gioSinhAmLich):
             self.thapNhiCung[cung['cungSoDiaBan']].cungChu(cung['tenCung'])
+        return self
+    
         return self
     
     def nhapcungChucId(self):

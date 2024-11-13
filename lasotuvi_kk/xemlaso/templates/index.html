@@ -6,8 +6,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lá số tử vi</title>
+    <title>Khâm Thiên Tứ Hóa</title>
     <link href="{% static "style.css" %}" rel="stylesheet">
+    <link href="{% static "star.css" %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.15/jsrender.min.js" integrity="sha512-6heofwTnm0osmeEuz47jQLMVpAe2/ww+hZ4xvyv/kgedYO0b9mhNnsh8nUQZrmcdbaDkxrN+1K4SV6L+V4EH6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -21,10 +22,15 @@
     <script src="{% static "d3-save-svg.min.js" %}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
-
+<div id="stars"></div>
 <body>
+    <header>
+        <a href="/" class="logo">Khâm Thiên Tứ Hóa</a>
+        <a href="https://www.facebook.com/khamthientuhoaminhphuong">
+            
+        </a>
+    </header>
     <div class="main">
         <div class="masthead">
             <div class="container" id="form-container">
@@ -146,7 +152,8 @@
         <div class="laso hide main" id="laso">
             <div class="laso_panel container">
                 <h3 class="wordmark">Tùy chỉnh lá số</h3>
-                <div>
+                <p>Liên hệ <a href="https://www.facebook.com/khamthientuhoaminhphuong" target="_blank">Khâm Thiên Tứ Hóa</a> để được luận giải Tử vi chuyên sâu.</p>
+                <div class="lasocontrols">
                     <button id="velaso1" class="secondary"> Lá số Tam Hợp</button>
                     <button id="velaso2" class="secondary"> Lá số Tam Hợp Đài Loan</button>
                     <button id="velaso3" class="secondary"> Lá số Khâm Thiên</button>
@@ -158,41 +165,27 @@
                 <div id="svg-controls">
                     <div>
                         <button id="zoomOutButton" onclick="zoomOut()" class="secondary">
-                            <span class="material-symbols-outlined">
-                                zoom_out
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1.2rem" height="1.2rem"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/></svg>
                         </button>
                         <button id="zoomInButton" onclick="zoomIn()" class="secondary">
-                            <span class="material-symbols-outlined">
-                            zoom_in
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1.2rem" height="1.2rem"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/></svg>
                         </button>
                         <button  id="resetButton" onclick="resetZoom()" class="secondary">
-                            <span class="material-symbols-outlined">
-                            home
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="1.2rem" height="1.2rem"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M575.8 255.5c0 18-15 32.1-32 32.1l-32 0 .7 160.2c0 2.7-.2 5.4-.5 8.1l0 16.2c0 22.1-17.9 40-40 40l-16 0c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1L416 512l-24 0c-22.1 0-40-17.9-40-40l0-24 0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32l0 64 0 24c0 22.1-17.9 40-40 40l-24 0-31.9 0c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2l-16 0c-22.1 0-40-17.9-40-40l0-112c0-.9 0-1.9 .1-2.8l0-69.7-32 0c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></svg>
                         </button>
                         <button id="fitToWidth" onclick="fitToWidth()" class="secondary">
-                            <span class="material-symbols-outlined">
-                            code
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1.2rem" height="1.2rem"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M406.6 374.6l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224l-293.5 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288l293.5 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z"/></svg>
                         </button>
                         <button id="fitToHeight" onclick="fitToHeight()" class="secondary">
-                            <span class="material-symbols-outlined">
-                            expand_all
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="1.2rem" height="1.2rem"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M182.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L128 109.3l0 293.5L86.6 361.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 402.7l0-293.5 41.4 41.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-96-96z"/></svg>
                         </button>
                     </div>
                     <div>
                         <button class="secondary" onclick="download()">
-                            <span class="material-symbols-outlined">
-                            download
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1.2rem" height="1.2rem"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>
                         </button>
                         <button class="secondary" onclick="print()">
-                            <span class="material-symbols-outlined">
-                            print
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1.2rem" height="1.2rem"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M128 0C92.7 0 64 28.7 64 64l0 96 64 0 0-96 226.7 0L384 93.3l0 66.7 64 0 0-66.7c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0L128 0zM384 352l0 32 0 64-256 0 0-64 0-16 0-16 256 0zm64 32l32 0c17.7 0 32-14.3 32-32l0-96c0-35.3-28.7-64-64-64L64 192c-35.3 0-64 28.7-64 64l0 96c0 17.7 14.3 32 32 32l32 0 0 64c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-64zM432 248a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>
                         </button>
                     </div>
                 </div>
@@ -205,7 +198,6 @@
     </div>
 </body>
 <footer>
-    <script src="{% static "svg.js" %}"></script>
     <script src="{% static "lunar.js" %}"></script>
     <script src="{% static "datepicker.js" %}"></script>
     <script src="{% static "drawing.js" %}"></script>
