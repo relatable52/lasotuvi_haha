@@ -1,2 +1,94 @@
-test.json
-*/__pycache__
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+*.venv/
+*.env/
+*.env.bak/
+*.venv.bak/
+
+# Installers
+*.exe
+*.msi
+*.app
+*.dmg
+*.pkg
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+*.cover
+*.py,cover
+*.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.coveragerc
+test-results/
+
+# MyPy
+.mypy_cache/
+
+# Pytest
+.pytest_cache/
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+media/
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VSCode
+.vscode/
+
+# macOS hidden files
+.DS_Store
+
+# Windows hidden files
+Thumbs.db
+desktop.ini
+
+# PyCharm
+.idea/
+
+# Pylint
+.pylintrc
+
+# Spyder project settings
+.spyproject/
+
+# PEP 8 configuration
+*.pep8
+
+# Jupyter Notebook
+*.ipynb
