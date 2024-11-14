@@ -652,9 +652,9 @@ def timAmSat(chiThang):
 def timPhaToai(chiNam):
     demNghich = chiNam % 3
     if demNghich == 0:
-        return 6
-    elif demNghich == 1:
         return 10
+    elif demNghich == 1:
+        return 6
     elif demNghich == 2:
         return 2
     else:

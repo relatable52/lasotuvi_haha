@@ -31,7 +31,7 @@ from lasotuvi.Sao import (saoAnQuang, saoBachHo, saoBacSy, saoBatToa, saoBenh,
                  luuLocTon, luuKinhDuong, luuThaiTue, luuThienHu, luuThienKhoc, luuThienMa, luuTVQuyen,
                  saoChiBoi, saoHamTri, saoHoaCai1, saoKiepSat1, saoNguyetSat, saoPhanAn, saoTaiSat,
                  saoThienSat, saoTucThan, saoTueDich, saoTuongTinh, saoVongThan,
-                 saoAmSat,saoBenhPhu1,saoHoiKhi,saoQuanSach,saoThienNguyet,saoThienVu, saoTieuHao1, DVDa, DVKinh, DVLocTon)
+                 saoAmSat,saoBenhPhu1,saoHoiKhi,saoQuanSach,saoThienNguyet,saoThienVu, saoTieuHao1, DVDa, DVKinh, DVLocTon, saoDaiHao1)
 
 from lasotuvi.DiaBan import diaBan
 
@@ -453,8 +453,8 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     elif canNam == 7:
         viTriHoaLoc = vitriThaiDuong
         viTriHoaQuyen = viTriVuKhuc
-        viTriHoaKhoa = viTriThienDong
-        viTriHoaKy = viTriThaiAm
+        viTriHoaKhoa = viTriThaiAm
+        viTriHoaKy = viTriThienDong
     elif canNam == 8:
         viTriHoaLoc = viTriCuMon
         viTriHoaQuyen = vitriThaiDuong
@@ -513,6 +513,9 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     viTriVongThan = dichCung(viTriTuongTinh, 11)
     diaBan.nhapSao(viTriVongThan, saoVongThan)
 
+# An Đại Hao
+    viTriDaiHao1 = dichCung(chiNam, amDuongNamNu*7)
+    diaBan.nhapSao(viTriDaiHao1, saoDaiHao1)
 #If chọn lá số khâm thiên
 # An Thiên Vu
     vitriThienVu = timThienVu(chiThang)
@@ -564,8 +567,8 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     elif canDVMenhID == 7:
         viTriHoaLoc = vitriThaiDuong
         viTriHoaQuyen = viTriVuKhuc
-        viTriHoaKhoa = viTriThienDong
-        viTriHoaKy = viTriThaiAm
+        viTriHoaKhoa = viTriThaiAm
+        viTriHoaKy = viTriThienDong
     elif canDVMenhID == 8:
         viTriHoaLoc = viTriCuMon
         viTriHoaQuyen = vitriThaiDuong
@@ -621,8 +624,8 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     elif canNamXem == 7:
         viTriHoaLoc = vitriThaiDuong
         viTriHoaQuyen = viTriVuKhuc
-        viTriHoaKhoa = viTriThienDong
-        viTriHoaKy = viTriThaiAm
+        viTriHoaKhoa = viTriThaiAm
+        viTriHoaKy = viTriThienDong
     elif canNamXem == 8:
         viTriHoaLoc = viTriCuMon
         viTriHoaQuyen = vitriThaiDuong
@@ -650,7 +653,7 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     #viTriThieuDuong = dichCung(viTriThaiTue, 1)
     #diaBan.nhapSao(viTriThieuDuong, saoThieuDuong, saoThienKhong)
 
-    viTriLuuTangMon = dichCung(viTriThaiTue, 2)
+    viTriLuuTangMon = dichCung(viTriLuuThaiTue, 2)
     diaBan.nhapSao(viTriLuuTangMon, luuTangMon)
 
     #viTriThieuAm = dichCung(viTriThaiTue, 3)
@@ -668,7 +671,7 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     #viTriLongDuc = dichCung(viTriThaiTue, 7)
     #diaBan.nhapSao(viTriLongDuc, saoLongDuc)
 
-    viTriLuuBachHo = dichCung(viTriThaiTue, 8)
+    viTriLuuBachHo = dichCung(viTriLuuThaiTue, 8)
     diaBan.nhapSao(viTriLuuBachHo, luuBachHo)
 
     #viTriPhucDuc = dichCung(viTriThaiTue, 9)

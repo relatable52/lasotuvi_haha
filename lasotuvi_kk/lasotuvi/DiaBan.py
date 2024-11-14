@@ -195,6 +195,10 @@ class diaBan(object):
             self.thapNhiCung[cung['cungSoDiaBan']].cungChucId(cung['cungChucId'])
         return self
     
+    def nhapcungChucId(self):
+        for cung in self.cungChu(self.thangSinhAmLich, self.gioSinhAmLich):
+            self.cungChucId = self.thapNhiCung['cungSoDiaBan'].cungChu(cung['cungChucId'])
+            return self
 
     def nhapDaiHan(self, cucSo, gioiTinh):
         """Nhap dai han
