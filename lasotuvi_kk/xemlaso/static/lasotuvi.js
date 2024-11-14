@@ -13,15 +13,20 @@ for (let i = min; i <= max; i++) {
 }
 
 function selectRadio(radio) {
-    const wrapper = radio.closest('.gender_btn_wrapper');
+    const wrapper = radio.closest('.radio_btn_wrapper');
 
     // Remove the selected class from all containers
     wrapper.querySelectorAll('.radio_btn').forEach(container => {
         container.classList.remove('selected');
     });
 
+    wrapper.querySelectorAll('button').forEach(container => {
+        container.classList.remove('selected');
+    });
+
     // Add the selected class to the clicked radio button's parent label
     radio.parentElement.classList.add('selected');
+    radio.classList.add('selected');
 }
 
 function toggle(){

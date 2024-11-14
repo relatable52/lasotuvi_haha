@@ -57,12 +57,16 @@ header{
     .main{
         width: 100%;
         min-height: max-content;
-        height: 100%;
+        height: max-content;
         display: flex;
         flex-direction: column;
         justify-content: start;
         align-content: center;
         align-items: center;
+    }
+    #chart{
+        height: max-content !important;
+        max-height: 90vh !important;
     }
     .laso_panel{
         width: 75% !important;
@@ -191,6 +195,11 @@ input{
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+button.selected{
+    border-color: #1a802d !important;
+    background-color: rgba(255, 255, 255, 0.3) !important;
+}
+
 /* Hide the default radio button */
 input[type="radio"] {
     display: none;
@@ -264,10 +273,6 @@ select{
     background-color: transparent;
     color: #ffd; 
     border: rgba(255, 255, 200, 0.1) solid 1px;
-}
-
-.button.secondary:hover{
-    background-color: rgba(255, 255, 200, 0.2); /* Darker green on hover */
 }
 
 .button.secondary:focus{
@@ -344,6 +349,11 @@ select{
     font-size: 1em !important;
 }
 
+#chart a{
+    fill: red;
+    font-style: italic;
+}
+
 .hanhKim {
     fill: rgb(165, 165, 165);
 }
@@ -401,6 +411,11 @@ select{
     margin-right: 0.2rem;
 }
 
+.laso_panel button{
+    margin: 0.1rem;
+    border: rgba(255, 255, 200, 0.5) solid 1px !important;
+}
+
 button.secondary {
     font-family: "Lexend", sans-serif;
     background-color: transparent;
@@ -422,6 +437,11 @@ button.secondary:focus{
 #svg-controls{
     display: flex;
     justify-content: space-between;
+}
+
+.button_container{
+    display: flex;
+    flex-direction: row;
 }
 
 .arrow{
