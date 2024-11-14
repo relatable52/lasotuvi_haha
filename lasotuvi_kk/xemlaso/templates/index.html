@@ -14,13 +14,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.15/jsrender.min.js" integrity="sha512-6heofwTnm0osmeEuz47jQLMVpAe2/ww+hZ4xvyv/kgedYO0b9mhNnsh8nUQZrmcdbaDkxrN+1K4SV6L+V4EH6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- Include jQuery UI CSS -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!-- Include jQuery UI JavaScript -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-
-    <script src="{% static "d3-save-svg.min.js" %}"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 </head>
 <div id="stars"></div>
@@ -152,6 +145,7 @@
         <div class="laso hide main" id="laso">
             <div class="laso_panel container">
                 <h3 class="wordmark">Tùy chỉnh lá số</h3>
+                <p>Liên hệ <a href="fb.com/khamthientuhoaminhphuong" style="color: rgb(210, 138, 30); text-decoration: none">Khâm Thiên Tứ Hóa</a> để được luận giải Tử vi chuyên sâu.</p>
                 <div>
                     <button id="velaso1" class="secondary"> Lá số Tam Hợp</button>
                     <button id="velaso2" class="secondary"> Lá số Tam Hợp Đài Loan</button>
@@ -197,6 +191,7 @@
     </div>
 </body>
 <footer>
+    <script src="{% static "svg.js" %}"></script>
     <script src="{% static "lunar.js" %}"></script>
     <script src="{% static "datepicker.js" %}"></script>
     <script src="{% static "drawing.js" %}"></script>
