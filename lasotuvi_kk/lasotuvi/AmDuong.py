@@ -119,97 +119,109 @@ diaChi = [
     {
         "id": 1,
         "tenChi": "Tý",
+        "giosinhSo": "23 giờ - 1 giờ",
         "tenHanh": "T",
-        "menhChu": "Tham lang",
-        "thanChu": "Linh tinh",
+        "menhChu": "Tham Lang",
+        "thanChu": "Linh Tinh",
         "amDuong": 1
     },
     {
         "id": 2,
         "tenChi": "Sửu",
+        "giosinhSo": "1 giờ - 3 giờ",
         "tenHanh": "O",
-        "menhChu": "Cự môn",
-        "thanChu": "Thiên tướng",
+        "menhChu": "Cự Môn",
+        "thanChu": "Thiên Tướng",
         "amDuong": -1
     },
     {
         "id": 3,
         "tenChi": "Dần",
+        "giosinhSo": "3 giờ - 5 giờ",
         "tenHanh": "M",
-        "menhChu": "Lộc tồn",
-        "thanChu": "Thiên lương",
+        "menhChu": "Lộc Tồn",
+        "thanChu": "Thiên Lương",
         "amDuong": 1
     },
     {
         "id": 4,
         "tenChi": "Mão",
+        "giosinhSo": "5 giờ - 7 giờ",
         "tenHanh": "M",
-        "menhChu": "Văn khúc",
-        "thanChu": "Thiên đồng",
+        "menhChu": "Văn Khúc",
+        "thanChu": "Thiên Đồng",
         "amDuong": -1
     },
     {
         "id": 5,
         "tenChi": "Thìn",
+        "giosinhSo": "7 giờ - 9 giờ",
         "tenHanh": "O",
-        "menhChu": "Liêm trinh",
-        "thanChu": "Văn xương",
+        "menhChu": "Liêm Trinh",
+        "thanChu": "Văn Xương",
         "amDuong": 1
     },
     {
         "id": 6,
         "tenChi": "Tỵ",
+        "giosinhSo": "9 giờ - 11 giờ",
         "tenHanh": "H",
-        "menhChu": "Vũ khúc",
-        "thanChu": "Thiên cơ",
+        "menhChu": "Vũ Khúc",
+        "thanChu": "Thiên Cơ",
         "amDuong": -1
     },
     {
         "id": 7,
         "tenChi": "Ngọ",
+        "giosinhSo": "11 giờ - 13 giờ",
         "tenHanh": "H",
-        "menhChu": "Phá quân",
-        "thanChu": "Hỏa tinh",
+        "menhChu": "Phá Quân",
+        "thanChu": "Hỏa Tinh",
         "amDuong": 1
     },
     {
         "id": 8,
         "tenChi": "Mùi",
+        "giosinhSo": "13 giờ - 15 giờ",
         "tenHanh": "O",
-        "menhChu": "Vũ khúc",
-        "thanChu": "Thiên tướng",
+        "menhChu": "Vũ Khúc",
+        "thanChu": "Thiên Tướng",
         "amDuong": -1
     },
     {
         "id": 9,
         "tenChi": "Thân",
+        "giosinhSo": "15 giờ - 17 giờ",
         "tenHanh": "K",
-        "menhChu": "Liêm trinh",
-        "thanChu": "Thiên lương",
+        "menhChu": "Liêm Trinh",
+        "thanChu": "Thiên Lương",
         "amDuong": 1
     },
     {
         "id": 10,
         "tenChi": "Dậu",
+        "giosinhSo": "17 giờ - 19 giờ",
         "tenHanh": "K",
-        "menhChu": "Văn khúc",
-        "thanChu": "Thiên đồng",
+        "menhChu": "Văn Khúc",
+        "thanChu": "Thiên Đồng",
         "amDuong": -1
     },
     {
         "id": 11,
         "tenChi": "Tuất",
+        "giosinhSo": "19 giờ - 21 giờ",
         "tenHanh": "O",
-        "menhChu": "Lộc tồn",
-        "thanChu": "Văn xương",
+        "menhChu": "Lộc Tồn",
+        "thanChu": "Văn Xương",
         "amDuong": 1
     },
     {
         "id": 12,
         "tenChi": "Hợi",
+        "giosinhSo": "21 giờ - 23 giờ",
         "tenHanh": "T",
-        "menhChu": "Cự môn",
-        "thanChu": "Thiên cơ",
+        "menhChu": "Cự Môn",
+        "thanChu": "Thiên Cơ",
         "amDuong": -1
     }
 ]
@@ -298,7 +310,7 @@ def ngayThangNamCanChi(nn, tt, nnnn, duongLich=True, timeZone=7):
             ngayThangNam(nn, tt, nnnn, timeZone=timeZone)
     # Can của tháng
     canThang = (nnnn * 12 + tt + 3) % 10 + 1
-    chiThang = (tt + 1) % 12 + 1
+    chiThang = tt
     # Can chi của năm
     canNamSinh = (nnnn + 6) % 10 + 1
     chiNam = (nnnn + 8) % 12 + 1
@@ -535,7 +547,7 @@ def timHoaLinh(chiNamSinh, gioSinh, gioiTinh, amDuongNamSinh):
 
 
 def timThienKhoi(canNam):
-    khoiViet = [None, 2, 1, 12, 10, 8, 1, 8, 7, 6, 4]
+    khoiViet = [None, 2, 1, 12, 12, 2, 1, 3, 3, 4, 4]
     try:
         return khoiViet[canNam]
     except:
@@ -640,9 +652,9 @@ def timAmSat(chiThang):
 def timPhaToai(chiNam):
     demNghich = chiNam % 3
     if demNghich == 0:
-        return 6
-    elif demNghich == 1:
         return 10
+    elif demNghich == 1:
+        return 6
     elif demNghich == 2:
         return 2
     else:

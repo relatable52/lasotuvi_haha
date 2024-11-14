@@ -299,6 +299,7 @@ select{
 
 .small{
     font-size: 0.8em;
+    font-weight: 450;
 }
 
 .smaller{
@@ -319,11 +320,11 @@ select{
 }
 
 .hanhKim {
-    fill: gray;
+    fill: rgb(165, 165, 165);
 }
 
 .hanhMoc {
-    fill: green;
+    fill: rgb(1, 177, 1);
 }
 
 .hanhThuy {
@@ -335,7 +336,7 @@ select{
 }
 
 .hanhTho {
-    fill: rgb(255, 193, 21);
+    fill: rgb(255, 187, 0);
 }
 
 .none{
@@ -343,13 +344,19 @@ select{
     font-weight: bold;
 }
 
+.big{
+    font-size: 1.2em;
+}
+
 .bold{
-    font-weight: bolder;
+    font-weight:bolder;
 }
 
 .blue{
     fill: rgb(0, 60, 255);
 }
+
+
 
 .tuantriet{
     fill: white !important;

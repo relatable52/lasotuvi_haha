@@ -31,7 +31,7 @@ from lasotuvi.Sao import (saoAnQuang, saoBachHo, saoBacSy, saoBatToa, saoBenh,
                  luuLocTon, luuKinhDuong, luuThaiTue, luuThienHu, luuThienKhoc, luuThienMa, luuTVQuyen,
                  saoChiBoi, saoHamTri, saoHoaCai1, saoKiepSat1, saoNguyetSat, saoPhanAn, saoTaiSat,
                  saoThienSat, saoTucThan, saoTueDich, saoTuongTinh, saoVongThan,
-                 saoAmSat,saoBenhPhu1,saoHoiKhi,saoQuanSach,saoThienNguyet,saoThienVu, saoTieuHao1)
+                 saoAmSat,saoBenhPhu1,saoHoiKhi,saoQuanSach,saoThienNguyet,saoThienVu, saoTieuHao1, DVDa, DVKinh, DVLocTon, saoDaiHao1)
 
 from lasotuvi.DiaBan import diaBan
 
@@ -409,6 +409,12 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     # Đẩu quân
     viTriDauQuan = dichCung(chiNam, -tt + gioSinh)
     diaBan.nhapSao(viTriDauQuan, saoDauQuan)
+    #  An Lưu Hà - Thiên Trù
+    # Sách cụ Thiên Lương không đề cập đến 2 sao này
+    # Mong mọi người kiểm chứng
+    viTriLuuHa, viTriThienTru = timLuuTru(canNam)
+    diaBan.nhapSao(viTriLuuHa, saoLuuHa)
+    diaBan.nhapSao(viTriThienTru, saoThienTru)
 
     #  Tứ Hóa
     # An theo 10 câu của cụ Thiên Lương trong cuốn
@@ -447,8 +453,8 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     elif canNam == 7:
         viTriHoaLoc = vitriThaiDuong
         viTriHoaQuyen = viTriVuKhuc
-        viTriHoaKhoa = viTriThienDong
-        viTriHoaKy = viTriThaiAm
+        viTriHoaKhoa = viTriThaiAm
+        viTriHoaKy = viTriThienDong
     elif canNam == 8:
         viTriHoaLoc = viTriCuMon
         viTriHoaQuyen = vitriThaiDuong
@@ -483,11 +489,11 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     viTriTucThan = dichCung(viTriTuongTinh, 3)
     diaBan.nhapSao(viTriTucThan, saoTucThan)
 
-    viTriHoaCai1 = dichCung(viTriTuongTinh, 4)
-    diaBan.nhapSao(viTriHoaCai1, saoHoaCai1)
+    #viTriHoaCai1 = dichCung(viTriTuongTinh, 4)
+    #diaBan.nhapSao(viTriHoaCai1, saoHoaCai1)
 
-    viTriKiepSat1 = dichCung(viTriTuongTinh, 5)
-    diaBan.nhapSao(viTriKiepSat1, saoKiepSat1)
+    #viTriKiepSat1 = dichCung(viTriTuongTinh, 5)
+    #diaBan.nhapSao(viTriKiepSat1, saoKiepSat1)
 
     viTriTaiSat = dichCung(viTriTuongTinh, 6)
     diaBan.nhapSao(viTriTaiSat, saoTaiSat)
@@ -498,8 +504,8 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     viTriChiBoi = dichCung(viTriTuongTinh, 8)
     diaBan.nhapSao(viTriChiBoi, saoChiBoi)
 
-    viTriHamTri = dichCung(viTriTuongTinh, 9)
-    diaBan.nhapSao(viTriHamTri, saoHamTri)
+    #viTriHamTri = dichCung(viTriTuongTinh, 9)
+    #diaBan.nhapSao(viTriHamTri, saoHamTri)
 
     viTriNguyetSat = dichCung(viTriTuongTinh, 10)
     diaBan.nhapSao(viTriNguyetSat, saoNguyetSat)
@@ -507,6 +513,9 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     viTriVongThan = dichCung(viTriTuongTinh, 11)
     diaBan.nhapSao(viTriVongThan, saoVongThan)
 
+# An Đại Hao
+    viTriDaiHao1 = dichCung(chiNam, amDuongNamNu*7)
+    diaBan.nhapSao(viTriDaiHao1, saoDaiHao1)
 #If chọn lá số khâm thiên
 # An Thiên Vu
     vitriThienVu = timThienVu(chiThang)
@@ -558,8 +567,8 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     elif canDVMenhID == 7:
         viTriHoaLoc = vitriThaiDuong
         viTriHoaQuyen = viTriVuKhuc
-        viTriHoaKhoa = viTriThienDong
-        viTriHoaKy = viTriThaiAm
+        viTriHoaKhoa = viTriThaiAm
+        viTriHoaKy = viTriThienDong
     elif canDVMenhID == 8:
         viTriHoaLoc = viTriCuMon
         viTriHoaQuyen = vitriThaiDuong
@@ -615,8 +624,8 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     elif canNamXem == 7:
         viTriHoaLoc = vitriThaiDuong
         viTriHoaQuyen = viTriVuKhuc
-        viTriHoaKhoa = viTriThienDong
-        viTriHoaKy = viTriThaiAm
+        viTriHoaKhoa = viTriThaiAm
+        viTriHoaKy = viTriThienDong
     elif canNamXem == 8:
         viTriHoaLoc = viTriCuMon
         viTriHoaQuyen = vitriThaiDuong
@@ -639,13 +648,13 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     diaBan.nhapSao(viTriHoaKy, luuTVKy)
 # Lưu vòng thái tuế
     viTriLuuThaiTue = chiNamXem
-    diaBan.nhapSao(viTriThaiTue, luuThaiTue)
+    diaBan.nhapSao(viTriLuuThaiTue, luuThaiTue)
 
     #viTriThieuDuong = dichCung(viTriThaiTue, 1)
     #diaBan.nhapSao(viTriThieuDuong, saoThieuDuong, saoThienKhong)
 
-    viTriTangMon = dichCung(viTriThaiTue, 2)
-    diaBan.nhapSao(viTriTangMon, luuTangMon)
+    viTriLuuTangMon = dichCung(viTriLuuThaiTue, 2)
+    diaBan.nhapSao(viTriLuuTangMon, luuTangMon)
 
     #viTriThieuAm = dichCung(viTriThaiTue, 3)
     #diaBan.nhapSao(viTriThieuAm, saoThieuAm)
@@ -662,8 +671,8 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
     #viTriLongDuc = dichCung(viTriThaiTue, 7)
     #diaBan.nhapSao(viTriLongDuc, saoLongDuc)
 
-    viTriBachHo = dichCung(viTriThaiTue, 8)
-    diaBan.nhapSao(viTriBachHo, luuBachHo)
+    viTriLuuBachHo = dichCung(viTriLuuThaiTue, 8)
+    diaBan.nhapSao(viTriLuuBachHo, luuBachHo)
 
     #viTriPhucDuc = dichCung(viTriThaiTue, 9)
     #diaBan.nhapSao(viTriPhucDuc, saoPhucDuc, saoThienDuc)
@@ -677,12 +686,6 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
 # Lưu Lộc Tồn
     viTriLuuLocTon = thienCan[canNamXem]['vitriDiaBan']
     diaBan.nhapSao(viTriLuuLocTon, luuLocTon)
-    #  An Lưu Hà - Thiên Trù
-    # Sách cụ Thiên Lương không đề cập đến 2 sao này
-    # Mong mọi người kiểm chứng
-    viTriLuuHa, viTriThienTru = timLuuTru(canNam)
-    diaBan.nhapSao(viTriLuuHa, saoLuuHa)
-    diaBan.nhapSao(viTriThienTru, saoThienTru)
 
 #   Lưu Kình dương - Đà la
     viTriLuuDaLa = dichCung(viTriLuuLocTon, -1)
@@ -690,6 +693,18 @@ def lapDiaBan(diaBan: diaBan, nn, tt, nnnn, gioSinh, gioiTinh, duongLich, timeZo
 
     viTriLuuKinhDuong = dichCung(viTriLuuLocTon, 1)
     diaBan.nhapSao(viTriLuuKinhDuong, luuKinhDuong)
+
+# Lưu ĐV Lộc Tồn
+    canDVMenhID = diaBan.canDVMenhID
+    viTriDVLocTon = thienCan[canDVMenhID]['vitriDiaBan']
+    diaBan.nhapSao(viTriDVLocTon, DVLocTon)
+
+#   Lưu ĐV Kình dương - Đà la
+    viTriDVDaLa = dichCung(viTriDVLocTon, -1)
+    diaBan.nhapSao(viTriDVDaLa, DVDa)
+
+    viTriDVKinhDuong = dichCung(viTriDVLocTon, 1)
+    diaBan.nhapSao(viTriDVKinhDuong, DVKinh)
 
 # Luu thiên khốc - thiên hư
     viTriLuuThienHu = dichCung(7, chiNamXem - 1)
