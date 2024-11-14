@@ -65,7 +65,7 @@ header{
         align-items: center;
     }
     .laso_panel{
-        width: 80% !important;
+        width: 75% !important;
         height: max-content !important;
     }
 }
@@ -77,6 +77,7 @@ header{
     align-content: center;
     justify-content: center;
     color: #ffd;
+    max-width: 30rem;
 }
 
 
@@ -94,7 +95,7 @@ header{
 }
 
 #form-container{
-    min-width: 25rem;   
+    min-width: 20rem; 
 }
 
 .wordmark{
@@ -280,8 +281,8 @@ select{
 }
 
 .chart-container{
-    width: 80%;
-    height: 85vh;
+    width: 75%;
+    height: 83vh;
     max-width: 60rem;
     display: flex;
     flex-direction: column;
@@ -408,8 +409,6 @@ button.secondary {
     border: rgba(255, 255, 200, 0.1) solid 1px;
     border-radius: 0.3rem;
     padding: 0.3rem;
-    margin-top: 0.2rem;
-    box-sizing: border-box;
 }
 
 button.secondary:hover{
@@ -457,25 +456,6 @@ button.secondary:focus{
     box-sizing: border-box;
     text-align: center;
     padding: 0.5rem
-}
-
-.lasocontrols{
-    padding-top: 0.3rem;
-    padding-bottom: 0.3rem;
-    box-sizing: border-box;
-}
-
-.laso_panel a {
-    color: #FFA500; /* Yellow-orange color */
-    text-decoration: none; /* Remove underline */
-}
-
-.laso_panel a:hover {
-    color: #FF8C00; /* Darker shade on hover */
-}
-
-.laso_panel a:active {
-    color: #FF7F50; /* Shade when active (clicked) */
 }
 
 @media screen {

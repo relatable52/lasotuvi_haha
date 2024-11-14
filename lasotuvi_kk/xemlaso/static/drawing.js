@@ -20,14 +20,6 @@ function velaso(laso, loaiLaSo = 0){
         .attr("viewBox", `0 0 ${width} ${height}`)
         .attr("id", "chart_svg")
         .attr("preserveAspectRatio", "xMinYMin meet");
-
-    var printable = d3.select("#printable")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("viewBox", `0 0 ${width} ${height}`)
-    .append("use")
-    .attr("xlink:href", "#chart_svg");
    
     const svg = chart_svg.append("g");
 
@@ -74,19 +66,6 @@ function velaso(laso, loaiLaSo = 0){
             .attr("stroke", "black");
     }
 
-    svg.append("defs")
-        .append("marker")
-        .attr("id", "arrowhead")
-        .attr("viewBox", "0 -5 10 10")
-        .attr("refX", 10)  // Controls position of the arrowhead along the path
-        .attr("refY", 0)
-        .attr("markerWidth", 6)
-        .attr("markerHeight", 6)
-        .attr("orient", "auto")  // Keeps arrowhead pointed along the path direction
-        .append("path")
-        .attr("d", "M0,-5L10,0L0,5")
-        .attr("fill", "red");
-
     function addText(text, x, y, style="", justify="middle"){
         svg.append("text")
         .attr("class", style)
@@ -106,14 +85,13 @@ function velaso(laso, loaiLaSo = 0){
             .attr("y2", y2) // Ending point y
             .attr("stroke", "black")
             .attr("stroke-width", 1)
-            .attr("marker-end", "url(#arrowhead)")
             .attr("class", style);
 
         const offset = 20; // Distance from the arrow tip
         const angle = Math.atan2(y2 - y1, x2 - x1);  // Angle of the line
 
-        const arrowSize = 8;
         // Calculate triangle points based on the angle
+        const arrowSize = 7;
         const arrowX1 = x2 - arrowSize * Math.cos(angle - Math.PI / 6);
         const arrowY1 = y2 - arrowSize * Math.sin(angle - Math.PI / 6);
         const arrowX2 = x2 - arrowSize * Math.cos(angle + Math.PI / 6);
@@ -161,12 +139,28 @@ function velaso(laso, loaiLaSo = 0){
     var middle_left = cell_width*0.03;
     var middle_right = cell_width*0.97;
 
+    var dau = [
+        [0.5, -1],
+        [-0.5, -1],
+        [-1, -1],
+        [-1, -0.5], 
+        [-1, 0.5],
+        [-1, 1],
+        [-0.5, 1], 
+        [0.5, 1],
+        [1, 1],
+        [1, 0.5],
+        [1, -0.5],
+        [1, -1]
+    ]
+
     function drawCell(data, loaiLaSo = loaiLaSo){
         var soSaoChinh = 0;
         var soSaoTot = 0;
         var soSaoXau = 0;
         var saohoaText = '';
         var saos = (loaiLaSo == 3)?data.cungSao.slice().reverse():data.cungSao;
+
         for(let sao of saos){
             if(sao.saoLoai == 1){
                 soSaoChinh += 1;
@@ -266,20 +260,7 @@ function velaso(laso, loaiLaSo = 0){
                 11:3,
                 12:0,
             }
-            var dau = [
-                [0.5, -1],
-                [-0.5, -1],
-                [-1, -1],
-                [-1, -0.5], 
-                [-1, 0.5],
-                [-1, 1],
-                [-0.5, 1], 
-                [0.5, 1],
-                [1, 1],
-                [1, 0.5],
-                [1, -0.5],
-                [1, -1]
-            ]
+           
             var x1, y1, x2, y2;
             if(viTri[data.cungSo] == 0){
                 x1 = (cung[data.cungTen][0]-1)*cell_width + cell_width/2;
@@ -346,8 +327,17 @@ function velaso(laso, loaiLaSo = 0){
     var tuan = 0;
     var triet = 0;
 
+    var menhId = 0;
+    var taiId = 0;
+    var quanId = 0;
+    var diId = 0;
+
     for(let i=1; i<13; i++){
         cell = data[i];
+        if(cell.cungChucId == 1) menhId = i;
+        if(cell.cungChucId == 9) taiId = i;
+        if(cell.cungChucId == 5) quanId = i;
+        if(cell.cungChucId == 7) diId = i;
         drawCell(cell, loaiLaSo);
         let start = (24+(i - chiNam))%12+1; 
         let tuoiText = start;
@@ -399,22 +389,40 @@ function velaso(laso, loaiLaSo = 0){
         .attr("class", "rect-style");
         addText("Tuần - Triệt", vitriTuanTriet[triet][0], vitriTuanTriet[triet][1], "small bold tuantriet", "middle");
     }
-    
-    
 
-<<<<<<< HEAD
+    function veTamGiac(menh, tai, quan, di){
+        var duong = [
+            [menh, di],
+            [tai, quan],
+            [menh, tai],
+            [menh, quan]
+        ]
+
+        for(let i of duong){
+            var x1 = width/2 + cell_width*dau[i[0]-1][0];
+            var y1 = height/2 - cell_height*dau[i[0]-1][1];
+            var x2 = width/2 + cell_width*dau[i[1]-1][0];
+            var y2 = height/2 - cell_height*dau[i[1]-1][1];
+
+            svg.append("line")
+                .attr("x1", x1)  // Starting point x
+                .attr("y1", y1)  // Starting point y
+                .attr("x2", x2) // Ending point x
+                .attr("y2", y2) // Ending point y
+                .attr("stroke", "gray")
+                .attr("stroke-width", 1);
+        }
+    }
+
+    veTamGiac(menhId, taiId, quanId, diId);
+    
     var left1 = cell_width*1.2;
     var left2 = cell_width*1.75;
-=======
-    var left1 = cell_width*1.25;
-    var left2 = cell_width*1.8;
->>>>>>> 73eca2581e4d2532178fa12b1b4b9a44394f842a
     var up1 = cell_height*1.4;
     var stepy1 = cell_width/10;
     var stepx1 = cell_width/6;
 
     var thienBanText = [
-<<<<<<< HEAD
         ["Họ tên:", 0, tb.ten, ""],
         ["Năm:", 1, tb.namDuong, tb.canNamTen + " " + tb.chiNamTen],
         ["Tháng:", 2, tb.thangDuong + " "+ "(" + tb.thangAm + ")", tb.canThangTen + " " + tb.chiThangTen],
@@ -427,20 +435,6 @@ function velaso(laso, loaiLaSo = 0){
         ["Cục:", 11, tb.tenCuc, ""],
         ["Thân chủ:", 14, tb.thanChu, ""],
         ["Mệnh chủ:", 13, tb.menhChu, ""],
-=======
-        ["Họ tên", 0, tb.ten, ""],
-        ["Năm", 1, tb.namDuong, tb.canNamTen + " " + tb.chiNamTen],
-        ["Tháng", 2, tb.thangDuong, tb.canThangTen + " " + tb.chiThangTen],
-        ["Ngày", 3, tb.ngayDuong, tb.canNgayTen + " " + tb.chiNgayTen],
-        ["Giờ", 4, tb.gioSinh, ""],
-        ["Năm xem", 6, tb.namxem, ""],
-        ["Tuổi", 7, tb.tuoi, ""],
-        ["Âm Dương", 9, tb.amDuongNamSinh + " " + tb.namNu, ""],
-        ["Mệnh", 10, tb.banMenh, ""],
-        ["Cục", 11, tb.tenCuc, ""],
-        ["Thân chủ", 14, tb.thanChu, ""],
-        ["Mệnh chủ", 13, tb.menhChu, ""],
->>>>>>> 73eca2581e4d2532178fa12b1b4b9a44394f842a
         [tb.amDuongMenh, 16, ""],
         [tb.sinhKhac, 17, ""]
     ]
@@ -464,11 +458,11 @@ function velaso(laso, loaiLaSo = 0){
 
         // Option 1: Change the location using x and y attributes
         d3.select(externalSvg)
-        .attr("x", 3*width/4 - 115)  // Move the external SVG to x=100
-        .attr("y", 3*height/4 - 115)  // Move the external SVG to y=100
-        .attr("width", 110)
-        .attr("height", 110)
-        .attr("preserveAspectRatio", "xMinYMin meet");
+        .attr("x", 3*width/4 - 127)  // Move the external SVG to x=100
+        .attr("y", 3*height/4 - 127)  // Move the external SVG to y=100
+        .attr("width", 125)
+        .attr("height", 125)
+        .attr("preserveAspectRatio", "xMidYMid meet");
 
         // Option 2: Use transform to move (this is more flexible)
         // d3.select(externalSvg)
@@ -503,6 +497,9 @@ function velaso(laso, loaiLaSo = 0){
         const translateY = (height * (1 - scaleFactor)) / 2;
         svg.style("transform", `translate(${translateX}px, ${translateY}px) scale(${scaleFactor})`);
     }
+
+    document.getElementById("printable").innerHTML = document.getElementById("chart").innerHTML;
+    d3.select("#printable svg").attr("width", width).attr("height", height);
 }
 
 function zoomIn(){
@@ -557,12 +554,44 @@ function velaso3(){
     velaso(lasoData, 3);
 }
 
-function download(){
+function download(filename = 'downloaded_image.png'){
     const svgElement = d3.select("#chart svg").node();
-    var config = {
-        filename: 'laso',
-    }
-    d3_save_svg.save(svgElement, config);
+    const svgString = preprocess(svgElement).source;
+    const img = new Image();
+    const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(svgBlob);
+
+    img.onload = () => {
+        const scaleFactor = 2; // Change this factor to make the image larger or smaller
+
+        // Create a canvas with scaled dimensions
+        const canvas = document.createElement('canvas');
+        canvas.width = svgElement.clientWidth * scaleFactor;
+        canvas.height = svgElement.clientHeight * scaleFactor;
+        const context = canvas.getContext('2d');
+
+        // Fill the canvas with a white background
+        context.fillStyle = "white";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw the image at the new scaled size
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        // Create a PNG download link
+        const pngUrl = canvas.toDataURL('image/png');
+        const downloadLink = document.createElement('a');
+        downloadLink.href = pngUrl;
+        downloadLink.download = filename;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+
+        // Clean up
+        URL.revokeObjectURL(url);
+    };
+
+    // Start loading the image
+    img.src = url;
 }
 
 // function print(){
