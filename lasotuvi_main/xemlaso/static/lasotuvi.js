@@ -1,12 +1,15 @@
 const selectElement = document.getElementById('namxem');
 const min = 1900;  // Minimum bound
 const max = 2100; // Maximum bound
+const thisYear = new Date().getFullYear();
+
+document.getElementById('currentYear').textContent = thisYear;
 
 for (let i = min; i <= max; i++) {
     const option = document.createElement('option');
     option.value = i;
     option.text = i;
-    if(i==2030){
+    if(i==thisYear){
         option.selected = true;
     }
     selectElement.appendChild(option);
@@ -26,7 +29,7 @@ function selectRadio(radio) {
 
     // Add the selected class to the clicked radio button's parent label
     radio.parentElement.classList.add('selected');
-    radio.classList.add('selected');
+    if(radio.tagName !== "INPUT") radio.classList.add('selected');
 }
 
 function toggle(){

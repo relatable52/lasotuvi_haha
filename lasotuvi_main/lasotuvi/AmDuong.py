@@ -13,7 +13,7 @@ thienCan = [
         "tenCan": None,
         "nguHanh": None,
         "nguHanhID": None,
-        "vitriDiaBan": None,
+        "vitriDiaBan": 1,
         'amDuong': None
     },
     {

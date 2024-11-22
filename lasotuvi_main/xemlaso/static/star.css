@@ -1,6 +1,8 @@
 #stars {
     width: 1px;
     height: 1px;
+    display: inline;
+    position: absolute;
     background: transparent;
     overflow: hidden;
     box-shadow: 779px 1331px #fff, 324px 42px #fff, 303px 586px #fff,

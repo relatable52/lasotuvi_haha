@@ -26,7 +26,9 @@ SECRET_KEY = "django-insecure-yzm%nfri+u9bh%gx038m9w27k)fb6x+p^akmwlt8b3v-ip^!l6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'bluegreen.id.vn', 'bluegreen.id.vn/lasotuvi', 'd2d3-2001-ee0-7008-a907-59ae-ebee-4fdf-b854.ngrok-free.app']
+ALLOWED_HOSTS = ['127.0.0.1', 'khamthientuhoa.com.vn']
+
+# settings.py
 
 # Application definition
 
@@ -117,7 +119,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = os.path.join(Path.home(), "public_html/lasotuvi/static/")
+STATIC_ROOT = os.path.join(Path.home(), "public_html/khamthientuhoa.com.vn/static/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

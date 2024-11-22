@@ -72,7 +72,7 @@ function populateGregorianMonths() {
     for (let i = 1; i <= 12; i++) {
         const option = document.createElement('option');
         option.value = i;
-        option.textContent = `Tháng ${i}`;
+        option.textContent = `${i}`;
         if (i == 1) option.selected = true;
         monthSelect.appendChild(option);
     }

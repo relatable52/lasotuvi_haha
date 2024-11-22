@@ -480,13 +480,6 @@ function velaso(laso, loaiLaSo = 0){
         addText(thienBanText[i][3], left2 + 4*stepx1, up1 + thienBanText[i][1]*stepy1, "thienban blue bold", "start");
     }
 
-    if(loaiLaSo == 3){
-        const scaleFactor = 0.85;
-        const translateX = (width * (1 - scaleFactor)) / 2;
-        const translateY = (height * (1 - scaleFactor)) / 2;
-        svg.style("transform", `translate(${translateX}px, ${translateY}px) scale(${scaleFactor})`);
-    }
-
     d3.xml("static/bitmap.svg")  // Replace with the path to your external SVG file  // Replace with the path to your external SVG file
     .then(function(data) {
         const externalSvg = data.documentElement;
@@ -499,15 +492,43 @@ function velaso(laso, loaiLaSo = 0){
         .attr("height", 100)
         .attr("preserveAspectRatio", "xMidYMid meet");
 
+        // Option 2: Use transform to move (this is more flexible)
+        // d3.select(externalSvg)
+        //   .attr("transform", "translate(100, 100)");  // Moves the external SVG by (100, 100)
+
+        // Append the external SVG to the parent SVG
         svg.node().appendChild(externalSvg);
-        document.getElementById("printable").innerHTML = document.getElementById("chart").innerHTML;
-        d3.select("#printable svg").attr("width", width).attr("height", height);
     })
     .catch(function(error) {
         console.log("Error loading external SVG: ", error);
     });
+    
+    // // Define the zoom behavior
+    // const zoom = d3.zoom()
+    //     .scaleExtent([0.5, 10]) // Set the scale limits (min and max zoom levels)
+    //     .translateExtent([[0,0], [width, height]])
+    //     .on("zoom", function (event) {
+    //         svg.attr("transform", event.transform); // Apply the zoom transformation to the inner `g` element
+    //     });
+
+    // // Apply zoom behavior to the SVG
+    // chart_svg.call(zoom);
+
+    // const resetButton = document.getElementById("resetButton");
+    // resetButton.addEventListener("click", function() {
+    //     // Reset the zoom and pan to the initial state
+    //     chart_svg.call(zoom.transform, d3.zoomIdentity); // Reset to default zoom and pan
+    // });
+    if(loaiLaSo == 3){
+        const scaleFactor = 0.85;
+        const translateX = (width * (1 - scaleFactor)) / 2;
+        const translateY = (height * (1 - scaleFactor)) / 2;
+        svg.style("transform", `translate(${translateX}px, ${translateY}px) scale(${scaleFactor})`);
+    }
 
     fitToWidth();
+    document.getElementById("printable").innerHTML = document.getElementById("chart").innerHTML;
+    d3.select("#printable svg").attr("width", width).attr("height", height);
 }
 
 window.addEventListener('resize', function() {
@@ -566,7 +587,7 @@ function velaso3(){
     velaso(lasoData, 3);
 }
 
-function download(filename = 'laso.jpg'){
+function download(filename = 'downloaded_image.png'){
     const svgElement = d3.select("#chart svg").node();
     const svgString = preprocess(svgElement).source;
     const img = new Image();
@@ -590,7 +611,7 @@ function download(filename = 'laso.jpg'){
         context.drawImage(img, 0, 0, canvas.width, canvas.height);
 
         // Create a PNG download link
-        const pngUrl = canvas.toDataURL('image/jpeg');
+        const pngUrl = canvas.toDataURL('image/png');
         const downloadLink = document.createElement('a');
         downloadLink.href = pngUrl;
         downloadLink.download = filename;
