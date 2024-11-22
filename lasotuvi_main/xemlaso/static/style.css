@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 html{
     height: 100%;
@@ -56,13 +57,17 @@ header{
 @media (max-width: 800px) {
     .main{
         width: 100%;
-        min-height: max-content;
-        height: 100%;
+        min-height: 100%;
+        height: max-content;
         display: flex;
         flex-direction: column;
         justify-content: start;
         align-content: center;
         align-items: center;
+    }
+    #chart{
+        height: max-content !important;
+        max-height: 90vh !important;
     }
     .laso_panel{
         width: 75% !important;
@@ -72,12 +77,12 @@ header{
 
 .masthead{
     height: max-content;
-    width: max-content;
+    width: 95%;
     display: flex;
     align-content: center;
     justify-content: center;
     color: #ffd;
-    max-width: 30rem;
+    max-width: max-content;
 }
 
 
@@ -92,10 +97,6 @@ header{
     display: flex;
     flex-direction: column;
     margin: 0.2rem;
-}
-
-#form-container{
-    min-width: 20rem; 
 }
 
 .wordmark{
@@ -174,7 +175,7 @@ input{
     border: rgba(255, 255, 200, 0.2) solid 1px;
     width: 50%;
     display: flex;
-    justify-content: space-around; 
+    justify-content: space-evenly; 
     align-items: center;
     min-height: 2rem;
     margin: 0.1rem;
@@ -191,45 +192,15 @@ input{
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+button.selected{
+    border-color: #1a802d !important;
+    background-color: rgba(255, 255, 255, 0.3) !important;
+}
+
 /* Hide the default radio button */
 input[type="radio"] {
     display: none;
 }
-
-/* Custom radio button style */
-.custom-radio {
-    width: 1rem;
-    height: 1rem;
-    border-radius: 50%;
-    display: inline-block;
-    position: relative;
-    transition: background-color 0.3s ease;
-}
-
-/* Checkmark that appears when the radio button is selected */
-.custom-radio::after {
-    content: '';
-    width: 0.3rem;
-    height: 0.5rem;
-    border: solid #ffd;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg) translateX(-0.08rem) translateY(0.05rem);
-    position: absolute;
-    top: 3px;
-    left: 6px;
-    display: none;
-}
-
-/* Style the radio button when checked */
-input[type="radio"]:checked + .custom-radio {
-    background-color: #4CAF50;
-}
-
-/* Show checkmark when radio is selected */
-input[type="radio"]:checked + .custom-radio::after {
-    display: block;
-}
-
 
 select{
     font-family: "Lexend", sans-serif;
@@ -266,10 +237,6 @@ select{
     border: rgba(255, 255, 200, 0.1) solid 1px;
 }
 
-.button.secondary:hover{
-    background-color: rgba(255, 255, 200, 0.2); /* Darker green on hover */
-}
-
 .button.secondary:focus{
     outline: none;
 }
@@ -297,7 +264,7 @@ select{
 }
 
 #chart {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Nunito", serif;
     font-style: normal;
     font-size: 15px;
     overflow: auto;
@@ -344,6 +311,11 @@ select{
     font-size: 1em !important;
 }
 
+#chart a{
+    fill: red;
+    font-style: italic;
+}
+
 .hanhKim {
     fill: rgb(165, 165, 165);
 }
@@ -361,7 +333,7 @@ select{
 }
 
 .hanhTho {
-    fill: rgb(255, 193, 21);
+    fill: rgb(255, 187, 0);
 }
 
 .none{
@@ -401,6 +373,11 @@ select{
     margin-right: 0.2rem;
 }
 
+.laso_panel button{
+    margin: 0.1rem;
+    border: rgba(255, 255, 200, 0.5) solid 1px !important;
+}
+
 button.secondary {
     font-family: "Lexend", sans-serif;
     background-color: transparent;
@@ -422,6 +399,11 @@ button.secondary:focus{
 #svg-controls{
     display: flex;
     justify-content: space-between;
+}
+
+.button_container{
+    display: flex;
+    flex-direction: row;
 }
 
 .arrow{
@@ -446,7 +428,7 @@ button.secondary:focus{
 }
 
 #printable{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Nunito", serif;
     font-style: normal;
     font-size: 15px;
     width: 100%;
@@ -475,9 +457,46 @@ button.secondary:focus{
     header{
         display: none;
     }
+    footer{
+        display: none !important;
+    }
     #printable{
         display: block;
         width: max-content;
         height: max-content;
     }
+}
+
+footer {
+    color: #ffd; /* White text */
+    fill: #ffd;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    align-items: start;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer a:visited{
+    fill: #ffd;
+}
+
+#socials{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#info{
+    display: flex;
+}
+
+.block{
+    margin-right: 2rem;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
 }

@@ -28,7 +28,6 @@ class lapThienBan(object):
         self.today = time.strftime("%d/%m/%Y")
         self.ngayDuong, self.thangDuong, self.namDuong, self.ten = \
             nn, tt, nnnn, ten
-        self.tuoi = namxem - self.namDuong + 1
         self.namxem = namxem
         if duongLich is True:
             self.ngayAm, self.thangAm, self.namAm, self.thangNhuan = \
@@ -37,6 +36,7 @@ class lapThienBan(object):
         else:
             self.ngayAm, self.thangAm, self.namAm = self.ngayDuong,\
                 self.thangDuong, self.namDuong
+        self.tuoi = namxem - self.namAm + 1
         _, _, namxemamlich, _ = ngayThangNam(1, 6, namxem, True, timeZone)
         _, _, self.canNamXem, self.chiNamXem = ngayThangNamCanChi(1, 1, namxemamlich, timeZone)
         self.canNamXemTen = thienCan[self.canNamXem]['tenCan']
@@ -44,9 +44,10 @@ class lapThienBan(object):
         self.canThang, self.chiThang,  self.canNam, self.chiNam = \
             ngayThangNamCanChi(self.ngayAm, self.thangAm,
                                self.namAm, False, self.timeZone)
+        self.chiThangReal = (self.chiThang + 1)%12 +1
         self.canThangTen = thienCan[self.canThang]['tenCan']
         self.canNamTen = thienCan[self.canNam]['tenCan']
-        self.chiThangTen = diaChi[self.chiThang]['tenChi']
+        self.chiThangTen = diaChi[self.chiThangReal]['tenChi']
         self.chiNamTen = diaChi[self.chiNam]['tenChi']
 
         self.canNgay, self.chiNgay = canChiNgay(
@@ -58,7 +59,7 @@ class lapThienBan(object):
         cungAmDuong = 1 if (diaBan.cungMenh % 2 == 1) else -1
         self.amDuongNamSinh = "Dương" if (self.chiNam % 2 == 1) else "Âm"
         self.amDuongNamSinhId = 1 if (self.chiNam % 2 == 1) else -1
-        if (cungAmDuong * self.gioiTinh == 1):
+        if (cungAmDuong * self.amDuongNamSinhId == 1):
             self.amDuongMenh = "Âm dương thuận lý"
         else:
             self.amDuongMenh = "Âm dương nghịch lý"
@@ -67,8 +68,10 @@ class lapThienBan(object):
         self.hanhCuc = nguHanh(cuc)['id']
         self.tenCuc = nguHanh(cuc)['tenCuc']
 
-        self.menhChu = diaChi[self.canNam]['menhChu']
-        self.thanChu = diaChi[self.canNam]['thanChu']
+        chiCungMenh = diaBan.thapNhiCung[diaBan.cungMenh].cungSo
+
+        self.menhChu = diaChi[chiCungMenh]['menhChu']
+        self.thanChu = diaChi[self.chiNam]['thanChu']
 
         self.menh = nguHanhNapAm(self.chiNam, self.canNam)
         menhId = nguHanh(self.menh)['id']

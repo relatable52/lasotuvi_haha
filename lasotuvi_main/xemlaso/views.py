@@ -29,7 +29,8 @@ def api(request):
                            gioSinh, gioiTinh, hoTen, db, namxem=namxem)
     laso = {
         'thienBan': thienBan,
-        'thapNhiCung': db.thapNhiCung
+        'thapNhiCung': db.thapNhiCung,
+        'diaBan': db
     }
     my_return = (json.dumps(laso, default=lambda o: o.__dict__))
     return HttpResponse(my_return, content_type="application/json")
